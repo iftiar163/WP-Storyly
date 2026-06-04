@@ -98,7 +98,7 @@ final class Settings {
     }
 
     public function field_stories_per_page() : void {
-        $options = get_option();
+        $options = $this->get_options();
         ?>
             <input
                 type="number"
@@ -115,7 +115,7 @@ final class Settings {
     }
 
     public function field_show_reading_time() : void{
-        $options = get_option();
+        $options = $this->get_options();
         ?>
             <label>
                 <input 
@@ -129,4 +129,97 @@ final class Settings {
 
         <?php
     }
+
+    public function field_show_progress_bar(): void {
+        $options = $this->get_options();
+        ?>
+        <label>
+            <input
+                type="checkbox"
+                name="<?php echo esc_attr( self::OPTION_NAME ); ?>[show_progress_bar]"
+                value="1"
+                <?php checked( 1, $options['show_progress_bar'] ); ?>
+            />
+            <?php esc_html_e( 'Show a reading progress bar at the top of single story pages.', 'wp-storyly' ); ?>
+        </label>
+        <?php
+    }
+
+    public function field_archive_slug() : void{
+        $options = $this->get_options();
+        ?>
+        <input
+            type="text"
+            name="<?php echo esc_attr( self::OPTION_NAME ); ?>[archive_slug]"
+            value="<?php echo esc_attr( $options['archive_slug'] ); ?>"
+            class="regular-text"
+        />
+        <p class="description">
+            <?php esc_html_e( 'URL slug for the stories archive. Save changes then go to Settings → Permalinks and click Save to flush rewrite rules.', 'wp-storyly' ); ?>
+        </p>
+        <?php
+    }
+
+    public function field_show_author_bio() : void {
+        $options = $this->get_options();
+         ?>
+        <label>
+            <input
+                type="checkbox"
+                name="<?php echo esc_attr( self::OPTION_NAME ); ?>[show_author_bio]"
+                value="1"
+                <?php checked( 1, $options['show_author_bio'] ); ?>
+            />
+            <?php esc_html_e( 'Display the author biography box below each story.', 'wp-storyly' ); ?>
+        </label>
+        <?php
+    }
+
+    public function field_show_related() : void {
+        $options = $this->get_options();
+        ?>
+        <label>
+            <input
+                type="checkbox"
+                name="<?php echo esc_attr( self::OPTION_NAME ); ?>[show_related]"
+                value="1"
+                <?php checked( 1, $options['show_related'] ); ?>
+            />
+            <?php esc_html_e( 'Show related stories section at the bottom of each story.', 'wp-storyly' ); ?>
+        </label>
+        <?php
+    }
+
+    public function render_page() : void {
+        if( ! current_user_can('manage_options') ){
+            return;
+        }
+
+        ?>
+        <div class="wrap">
+            <h1>
+                <?php esc_html_e( 'WP Storyly Settings', 'wp-storyly' ); ?>
+            </h1>
+
+            <?php settings_errors( self::OPTION_GROUP ); ?>
+
+            <form method="post" action="options.php">
+                <?php
+                settings_fields( self::OPTION_GROUP );
+                do_settings_sections( self::PAGE_SLUG );
+                submit_button( __( 'Save Settings', 'wp-storyly' ) );
+                ?>
+            </form>
+        </div>
+        <?php
+    }
+
+    public function sanitize_options( array $input ) : array {
+        $clean = $this->defaults();
+
+        $clean['stories_per_page'] = isset($input['stories_per_page']) ? min(50, max(1, absint($input['stories_per_page']))) : 10;
+        $clean['show_reading_time'] = !empty($input['show_reading_time']) ? 1 : 0;
+    }
+
+
 }
