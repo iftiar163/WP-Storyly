@@ -56,7 +56,7 @@ final class Story {
         register_post_type( 'story', $args );
     }
 
-    public function load_templates( string $template) : string {
+    public function load_template( string $template) : string {
         if(is_singular('story')){
             $custom = WP_STORYLY_PATH . 'templates/single-story.php';
             if(file_exists($custom)){

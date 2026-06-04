@@ -22,5 +22,7 @@ final class Plugin {
         (new CPT\Story())->register();
         (new Taxonomy\Topic())->register();
         (new Meta\Story())->register();
+        (new Assets())->register();
+        (new Admin\Settings())->register();
     }
 }

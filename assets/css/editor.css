@@ -1,0 +1,36 @@
+/* ============================================================
+   WP Storyly — Block Editor Styles
+   ============================================================ */
+
+.editor-styles-wrapper {
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: 20px !important;
+  line-height: 1.8 !important;
+  color: #242424 !important;
+}
+
+.editor-styles-wrapper .wp-block-post-title,
+.editor-styles-wrapper h1.wp-block-heading {
+  font-size: 42px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.5px !important;
+  line-height: 1.2 !important;
+}
+
+.editor-styles-wrapper h2.wp-block-heading {
+  font-size: 30px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+}
+
+.editor-styles-wrapper .wp-block-paragraph {
+  font-size: 20px !important;
+  line-height: 1.8 !important;
+}
+
+.editor-styles-wrapper .wp-block-quote {
+  border-left: 3px solid #242424 !important;
+  padding-left: 24px !important;
+  font-style: italic !important;
+  color: #6b6b6b !important;
+}
