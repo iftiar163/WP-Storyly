@@ -1,6 +1,6 @@
 <?php
 
-namespace WPStoryly;
+namespace Storyly;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -13,7 +13,7 @@ final class Activator{
     private static function create_default_topics() : void {
         if(!taxonomy_exists('storyly_topics')){
             register_taxonomy('storyly_topics', ['storyly'], [
-                'label' => __('Topics', 'wp-storyly'),
+                'label' => __('Topics', 'storyly'),
                 'public' => true,
                 'hierarchical' => true,
                 'show_ui' => true,

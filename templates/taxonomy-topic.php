@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-$topic = get_queried_object();
+$storyly_topic = get_queried_object();
 ?>
 
 <div class="storyly-wrapper">
@@ -11,20 +11,21 @@ $topic = get_queried_object();
 
         <header class="storyly-archive-header">
             <p class="storyly-topic-label">
-                <?php esc_html_e( 'Topic', 'wp-storyly' ); ?>
+                <?php esc_html_e( 'Topic', 'storyly' ); ?>
             </p>
             <h1 class="storyly-archive-title">
-                <?php echo esc_html( $topic->name ); ?>
+                <?php echo esc_html( $storyly_topic->name ); ?>
             </h1>
-            <?php if ( $topic->description ) : ?>
+            <?php if ( $storyly_topic->description ) : ?>
                 <p class="storyly-topic-desc">
-                    <?php echo esc_html( $topic->description ); ?>
+                    <?php echo esc_html( $storyly_topic->description ); ?>
                 </p>
             <?php endif; ?>
             <p class="storyly-topic-count">
                 <?php printf(
-                    esc_html( _n( '%s story', '%s stories', $topic->count, 'wp-storyly' ) ),
-                    number_format_i18n( $topic->count )
+                    /* translators: %s: number of stories */
+                    esc_html( _n( '%s story', '%s stories', $storyly_topic->count, 'storyly' ) ),
+                    esc_html( number_format_i18n( $storyly_topic->count ) )
                 ); ?>
             </p>
         </header>
@@ -32,22 +33,22 @@ $topic = get_queried_object();
         <?php if ( have_posts() ) : ?>
             <div class="storyly-feed">
                 <?php while ( have_posts() ) : the_post(); ?>
-                    <?php include WP_STORYLY_PATH . 'templates/partials/story-card.php'; ?>
+                    <?php include STORYLY_PATH . 'templates/partials/story-card.php'; ?>
                 <?php endwhile; ?>
             </div>
 
             <nav class="storyly-pagination">
                 <?php
-                echo paginate_links( [
-                    'prev_text' => esc_html__( '← Older', 'wp-storyly' ),
-                    'next_text' => esc_html__( 'Newer →', 'wp-storyly' ),
-                ] );
+                echo wp_kses_post( paginate_links( [
+                    'prev_text' => esc_html__( '← Older', 'storyly' ),
+                    'next_text' => esc_html__( 'Newer →', 'storyly' ),
+                ] ) );
                 ?>
             </nav>
 
         <?php else : ?>
             <p class="storyly-no-stories">
-                <?php esc_html_e( 'No stories in this topic yet.', 'wp-storyly' ); ?>
+                <?php esc_html_e( 'No stories in this topic yet.', 'storyly' ); ?>
             </p>
         <?php endif; ?>
 

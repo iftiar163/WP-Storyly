@@ -1,10 +1,10 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-$reading_time = get_post_meta( get_the_ID(), '_storyly_reading_time', true ) ?: 1;
-$subtitle     = get_post_meta( get_the_ID(), '_storyly_subtitle', true );
-$topics       = get_the_terms( get_the_ID(), 'storyly_topic' );
-$author_id    = get_the_author_meta( 'ID' );
+$storyly_reading_time = get_post_meta( get_the_ID(), '_storyly_reading_time', true ) ?: 1;
+$storyly_subtitle     = get_post_meta( get_the_ID(), '_storyly_subtitle', true );
+$storyly_topics       = get_the_terms( get_the_ID(), 'storyly_topic' );
+$storyly_author_id    = get_the_author_meta( 'ID' );
 ?>
 
 <article <?php post_class( 'storyly-card' ); ?>>
@@ -12,8 +12,8 @@ $author_id    = get_the_author_meta( 'ID' );
 
         <!-- Author row -->
         <div class="storyly-card-author">
-            <?php echo get_avatar( $author_id, 24, '', '', [ 'class' => 'storyly-avatar-sm' ] ); ?>
-            <a href="<?php echo esc_url( get_author_posts_url( $author_id ) ); ?>"
+            <?php echo get_avatar( $storyly_author_id, 24, '', '', [ 'class' => 'storyly-avatar-sm' ] ); ?>
+            <a href="<?php echo esc_url( get_author_posts_url( $storyly_author_id ) ); ?>"
                class="storyly-card-author-name">
                 <?php the_author(); ?>
             </a>
@@ -27,9 +27,9 @@ $author_id    = get_the_author_meta( 'ID' );
                 </h2>
 
                 <!-- Subtitle / Excerpt -->
-                <?php if ( $subtitle ) : ?>
+                <?php if ( $storyly_subtitle ) : ?>
                     <p class="storyly-card-subtitle">
-                        <?php echo esc_html( wp_trim_words( $subtitle, 20 ) ); ?>
+                        <?php echo esc_html( wp_trim_words( $storyly_subtitle, 20 ) ); ?>
                     </p>
                 <?php elseif ( has_excerpt() ) : ?>
                     <p class="storyly-card-subtitle">
@@ -39,18 +39,19 @@ $author_id    = get_the_author_meta( 'ID' );
 
                 <!-- Meta row -->
                 <div class="storyly-card-meta">
-                    <?php if ( ! empty( $topics ) && ! is_wp_error( $topics ) ) : ?>
-                        <a href="<?php echo esc_url( get_term_link( $topics[0] ) ); ?>"
+                    <?php if ( ! empty( $storyly_topics ) && ! is_wp_error( $storyly_topics ) ) : ?>
+                        <a href="<?php echo esc_url( get_term_link( $storyly_topics[0] ) ); ?>"
                            class="storyly-card-topic">
-                            <?php echo esc_html( $topics[0]->name ); ?>
+                            <?php echo esc_html( $storyly_topics[0]->name ); ?>
                         </a>
                         <span class="storyly-dot">·</span>
                     <?php endif; ?>
                     <span><?php echo esc_html( get_the_date( 'M j' ) ); ?></span>
                     <span class="storyly-dot">·</span>
                     <span><?php printf(
-                        esc_html__( '%d min read', 'wp-storyly' ),
-                        (int) $reading_time
+                        /* translators: %d: number of minutes */
+                        esc_html__( '%d min read', 'storyly' ),
+                        (int) $storyly_reading_time
                     ); ?></span>
                 </div>
             </div>

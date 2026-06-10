@@ -1,5 +1,5 @@
 <?php
-namespace WPStoryly;
+namespace Storyly;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -16,10 +16,10 @@ final class Assets {
         }
 
         wp_enqueue_style(
-            'wp-storyly-frontend',
-            WP_STORYLY_URL . 'assets/css/frontend.css',
+            'storyly-frontend',
+            STORYLY_URL . 'assets/css/frontend.css',
             [],
-            WP_STORYLY_VERSION
+            STORYLY_VERSION
         );
     }
 
@@ -34,10 +34,10 @@ final class Assets {
         }
 
         wp_enqueue_style(
-            'wp-storyly-editor',
-            WP_STORYLY_URL . 'assets/css/editor.css',
+            'storyly-editor',
+            STORYLY_URL . 'assets/css/editor.css',
             [ 'wp-edit-blocks' ],
-            WP_STORYLY_VERSION
+            STORYLY_VERSION
         );
     }
 

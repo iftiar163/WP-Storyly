@@ -1,6 +1,6 @@
 <?php
 
-namespace WPStoryly;
+namespace Storyly;
 
 defined( 'ABSPATH' ) || exit;
 

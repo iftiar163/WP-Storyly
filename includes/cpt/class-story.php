@@ -1,5 +1,5 @@
 <?php
-namespace WPStoryly\CPT;
+namespace Storyly\CPT;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,20 +11,20 @@ final class Story {
 
     public function register_post_type(): void {
     $labels = [
-        'name'                  => __( 'Stories',                   'wp-storyly' ),
-        'singular_name'         => __( 'Story',                     'wp-storyly' ),
-        'add_new'               => __( 'New Story',                 'wp-storyly' ),
-        'add_new_item'          => __( 'Add New Story',             'wp-storyly' ),
-        'edit_item'             => __( 'Edit Story',                'wp-storyly' ),
-        'new_item'              => __( 'New Story',                 'wp-storyly' ),
-        'view_item'             => __( 'View Story',                'wp-storyly' ),
-        'view_items'            => __( 'View Stories',              'wp-storyly' ),
-        'search_items'          => __( 'Search Stories',            'wp-storyly' ),
-        'not_found'             => __( 'No stories found.',         'wp-storyly' ),
-        'not_found_in_trash'    => __( 'No stories found in Trash.','wp-storyly' ),
-        'all_items'             => __( 'All Stories',               'wp-storyly' ),
-        'menu_name'             => __( 'Stories',                   'wp-storyly' ),
-        'name_admin_bar'        => __( 'Story',                     'wp-storyly' ),
+        'name'                  => __( 'Stories',                   'storyly' ),
+        'singular_name'         => __( 'Story',                     'storyly' ),
+        'add_new'               => __( 'New Story',                 'storyly' ),
+        'add_new_item'          => __( 'Add New Story',             'storyly' ),
+        'edit_item'             => __( 'Edit Story',                'storyly' ),
+        'new_item'              => __( 'New Story',                 'storyly' ),
+        'view_item'             => __( 'View Story',                'storyly' ),
+        'view_items'            => __( 'View Stories',              'storyly' ),
+        'search_items'          => __( 'Search Stories',            'storyly' ),
+        'not_found'             => __( 'No stories found.',         'storyly' ),
+        'not_found_in_trash'    => __( 'No stories found in Trash.','storyly' ),
+        'all_items'             => __( 'All Stories',               'storyly' ),
+        'menu_name'             => __( 'Stories',                   'storyly' ),
+        'name_admin_bar'        => __( 'Story',                     'storyly' ),
     ];
 
     $args = [
@@ -58,14 +58,14 @@ final class Story {
 
     public function load_template( string $template) : string {
         if(is_singular('story')){
-            $custom = WP_STORYLY_PATH . 'templates/single-story.php';
+            $custom = STORYLY_PATH . 'templates/single-story.php';
             if(file_exists($custom)){
                 return $custom;
             }
         }
 
         if(is_post_type_archive('story')){
-            $custom = WP_STORYLY_PATH . 'templates/archive-story.php';
+            $custom = STORYLY_PATH . 'templates/archive-story.php';
             if(file_exists($custom)){
                 return $custom;
             }

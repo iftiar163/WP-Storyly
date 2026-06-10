@@ -1,6 +1,6 @@
 <?php
 
-namespace WPStoryly\Admin;
+namespace Storyly\Admin;
 
 defined('ABSPATH') || exit;
 
@@ -8,20 +8,20 @@ final class Settings
 {
     private const OPTION_GROUP = 'wp_storyly_settings';
     private const OPTION_NAME = 'wp_storyly_options';
-    private const PAGE_SLUG = 'wp-storyly-settings';
+    private const PAGE_SLUG = 'storyly-settings';
 
     public function register(): void
     {
         add_action('admin_menu', [$this, 'add_menu_page']);
         add_action('admin_init', [$this, 'register_settings']);
-        add_filter('plugin_action_links_' . WP_STORYLY_BASENAME, [$this, 'add_settings_link']);
+        add_filter('plugin_action_links_' . STORYLY_BASENAME, [$this, 'add_settings_link']);
     }
 
     public function add_menu_page(): void
     {
         add_menu_page(
-            __('WP Storyly Settings', 'wp-storyly'),
-            __('Storyly', 'wp-storyly'),
+            __('Storyly Settings', 'storyly'),
+            __('Storyly', 'storyly'),
             'manage_options',
             self::PAGE_SLUG,
             [$this, 'render_page']
@@ -41,14 +41,14 @@ final class Settings
 
         add_settings_section(
             'storyly_section_reading',
-            __('Reading Experience', 'wp-storyly'),
+            __('Reading Experience', 'storyly'),
             '__return_false',
             self::PAGE_SLUG,
         );
 
         add_settings_field(
             'stories_per_page',
-            __('Stories Per Page', 'wp-storyly'),
+            __('Stories Per Page', 'storyly'),
             [$this, 'field_stories_per_page'],
             self::PAGE_SLUG,
             'storyly_section_reading'
@@ -56,7 +56,7 @@ final class Settings
 
         add_settings_field(
             'show_reading_time',
-            __('Show Reading Time', 'wp-storyly'),
+            __('Show Reading Time', 'storyly'),
             [$this, 'field_show_reading_time'],
             self::PAGE_SLUG,
             'storyly_section_reading'
@@ -64,7 +64,7 @@ final class Settings
 
         add_settings_field(
             'show_progress_bar',
-            __('Show reading progress bar', 'wp-storyly'),
+            __('Show reading progress bar', 'storyly'),
             [$this, 'field_show_progress_bar'],
             self::PAGE_SLUG,
             'storyly_section_reading'
@@ -73,14 +73,14 @@ final class Settings
         // Section: Archive
         add_settings_section(
             'storyly_section_archive',
-            __('Archive & Feed', 'wp-storyly'),
+            __('Archive & Feed', 'storyly'),
             '__return_false',
             self::PAGE_SLUG
         );
 
         add_settings_field(
             'archive_slug',
-            __('Stories Archive Slug', 'wp-storyly'),
+            __('Stories Archive Slug', 'storyly'),
             [$this, 'field_archive_slug'],
             self::PAGE_SLUG,
             'storyly_section_archive'
@@ -88,7 +88,7 @@ final class Settings
 
         add_settings_field(
             'show_author_bio',
-            __('Show author bio on single story', 'wp-storyly'),
+            __('Show author bio on single story', 'storyly'),
             [$this, 'field_show_author_bio'],
             self::PAGE_SLUG,
             'storyly_section_archive'
@@ -96,7 +96,7 @@ final class Settings
 
         add_settings_field(
             'show_related',
-            __('Show related stories', 'wp-storyly'),
+            __('Show related stories', 'storyly'),
             [$this, 'field_show_related'],
             self::PAGE_SLUG,
             'storyly_section_archive'
@@ -115,7 +115,7 @@ final class Settings
             max="50"
             class="small-text" />
         <p class="description">
-            <?php esc_html_e('Number of stories shown on archive and topic pages.', 'wp-storyly'); ?>
+            <?php esc_html_e('Number of stories shown on archive and topic pages.', 'storyly'); ?>
         </p>
     <?php
     }
@@ -130,7 +130,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_reading_time]"
                 value="1"
                 <?php checked(1, $options['show_reading_time']) ?>>
-            <?php esc_html_e('Display estimated reading time on story cards and single pages.', 'wp-storyly'); ?>
+            <?php esc_html_e('Display estimated reading time on story cards and single pages.', 'storyly'); ?>
         </label>
 
     <?php
@@ -146,7 +146,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_progress_bar]"
                 value="1"
                 <?php checked(1, $options['show_progress_bar']); ?> />
-            <?php esc_html_e('Show a reading progress bar at the top of single story pages.', 'wp-storyly'); ?>
+            <?php esc_html_e('Show a reading progress bar at the top of single story pages.', 'storyly'); ?>
         </label>
     <?php
     }
@@ -161,7 +161,7 @@ final class Settings
             value="<?php echo esc_attr($options['archive_slug']); ?>"
             class="regular-text" />
         <p class="description">
-            <?php esc_html_e('URL slug for the stories archive. Save changes then go to Settings → Permalinks and click Save to flush rewrite rules.', 'wp-storyly'); ?>
+            <?php esc_html_e('URL slug for the stories archive. Save changes then go to Settings → Permalinks and click Save to flush rewrite rules.', 'storyly'); ?>
         </p>
     <?php
     }
@@ -176,7 +176,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_author_bio]"
                 value="1"
                 <?php checked(1, $options['show_author_bio']); ?> />
-            <?php esc_html_e('Display the author biography box below each story.', 'wp-storyly'); ?>
+            <?php esc_html_e('Display the author biography box below each story.', 'storyly'); ?>
         </label>
     <?php
     }
@@ -191,7 +191,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_related]"
                 value="1"
                 <?php checked(1, $options['show_related']); ?> />
-            <?php esc_html_e('Show related stories section at the bottom of each story.', 'wp-storyly'); ?>
+            <?php esc_html_e('Show related stories section at the bottom of each story.', 'storyly'); ?>
         </label>
     <?php
     }
@@ -205,7 +205,7 @@ final class Settings
     ?>
         <div class="wrap">
             <h1>
-                <?php esc_html_e('WP Storyly Settings', 'wp-storyly'); ?>
+                <?php esc_html_e('Storyly Settings', 'storyly'); ?>
             </h1>
 
             <?php settings_errors(self::OPTION_GROUP); ?>
@@ -214,7 +214,7 @@ final class Settings
                 <?php
                 settings_fields(self::OPTION_GROUP);
                 do_settings_sections(self::PAGE_SLUG);
-                submit_button(__('Save Settings', 'wp-storyly'));
+                submit_button(__('Save Settings', 'storyly'));
                 ?>
             </form>
         </div>
@@ -259,7 +259,7 @@ final class Settings
         $link = sprintf(
             '<a href="%s">%s</a>',
             esc_url($url),
-            esc_html__('Settings', 'wp-storyly')
+            esc_html__('Settings', 'storyly')
         );
         array_unshift($links, $link);
         return $links;

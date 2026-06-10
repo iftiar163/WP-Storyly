@@ -1,5 +1,5 @@
 <?php
-namespace WPStoryly\Meta;
+namespace Storyly\Meta;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -15,7 +15,7 @@ final class Story {
         // Subtitle
         register_post_meta( 'story', '_storyly_subtitle', [
             'type'              => 'string',
-            'description'       => __( 'Story subtitle', 'wp-storyly' ),
+            'description'       => __( 'Story subtitle', 'storyly' ),
             'single'            => true,
             'default'           => '',
             'sanitize_callback' => 'sanitize_text_field',
@@ -26,7 +26,7 @@ final class Story {
         // Reading time (minutes) — auto-calculated
         register_post_meta( 'story', '_storyly_reading_time', [
             'type'              => 'integer',
-            'description'       => __( 'Estimated reading time in minutes', 'wp-storyly' ),
+            'description'       => __( 'Estimated reading time in minutes', 'storyly' ),
             'single'            => true,
             'default'           => 1,
             'sanitize_callback' => 'absint',
@@ -38,7 +38,7 @@ final class Story {
     public function register_meta_boxes(): void {
         add_meta_box(
             'storyly_subtitle',
-            __('Story Subtitle', 'wp-storyly'),
+            __('Story Subtitle', 'storyly'),
             [$this, 'render_subtitle_field'],
             'story',
             'normal',
@@ -55,7 +55,7 @@ final class Story {
             id="storyly_subtitle" 
             name="storyly_subtitle" 
             value="<?php echo esc_attr( $subtitle ); ?>" 
-            placeholder="<?php esc_attr_e( 'Enter story subtitle', 'wp-storyly' ); ?>"
+            placeholder="<?php esc_attr_e( 'Enter story subtitle', 'storyly' ); ?>"
             style="width: 100%; padding: 8px; font-size: 14px;"
         />
         <?php
@@ -72,7 +72,7 @@ final class Story {
         }
 
         // Verify nonce
-        if ( ! isset( $_POST['storyly_subtitle_nonce'] ) || ! wp_verify_nonce( $_POST['storyly_subtitle_nonce'], 'storyly_subtitle_nonce' ) ) {
+        if ( ! isset( $_POST['storyly_subtitle_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['storyly_subtitle_nonce'] ) ), 'storyly_subtitle_nonce' ) ) {
             return;
         }
 
@@ -83,7 +83,7 @@ final class Story {
 
         // Save subtitle
         if ( isset( $_POST['storyly_subtitle'] ) ) {
-            $subtitle = sanitize_text_field( $_POST['storyly_subtitle'] );
+            $subtitle = sanitize_text_field( wp_unslash( $_POST['storyly_subtitle'] ) );
             update_post_meta( $post_id, '_storyly_subtitle', $subtitle );
         } else {
             delete_post_meta( $post_id, '_storyly_subtitle' );
