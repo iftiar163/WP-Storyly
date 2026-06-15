@@ -1,5 +1,5 @@
-=== Storyly ===
-Contributors:      yourwporgusername
+=== Narrato for Writers by Iftiar ===
+Contributors:      iftiarhossain
 Tags:              blog, writing, stories, medium, publishing
 Requires at least: 6.4
 Tested up to:      7.0
@@ -12,13 +12,12 @@ Transform your WordPress site into a clean, Medium-style writing and reading pla
 
 == Description ==
 
-Storyly turns any WordPress installation into a focused writing and reading platform inspired by Medium.com.
+Narrato for Writers by Iftiar turns any WordPress installation into a focused writing and reading platform inspired by Medium.com.
 
 Install the plugin, activate it, and you immediately get:
 
 * A dedicated **Story** post type with subtitle and reading time support
 * A **Topics** taxonomy to organise stories by subject
-* Four **Gutenberg blocks** — Story Header, Story Card, Story Feed, Reading Time
 * Clean, distraction-free front-end templates for single stories, archives, and topic pages
 * A reading progress bar on every story
 * Auto-calculated reading time based on word count
@@ -37,9 +36,9 @@ Install the plugin, activate it, and you immediately get:
 
 == Installation ==
 
-1. Upload the `storyly` folder to the `/wp-content/plugins/` directory, or install directly from the WordPress plugin directory.
+1. Upload the `narrato-for-writers` folder to the `/wp-content/plugins/` directory, or install directly from the WordPress plugin directory.
 2. Activate the plugin through the **Plugins** menu in WordPress.
-3. Go to **Settings → Storyly** to configure display options.
+3. Go to **Settings → Narrato Settings** to configure display options.
 4. Go to **Stories → Add New** to write your first story.
 5. Visit **Settings → Permalinks** and click Save to flush rewrite rules.
 
@@ -47,11 +46,11 @@ Install the plugin, activate it, and you immediately get:
 
 = Does this plugin work with my current theme? =
 
-Yes. Storyly injects its own templates for story pages, archives and topic pages. These work alongside both classic and block themes without modifying your theme files.
+Yes. Narrato for Writers injects its own templates for story pages, archives and topic pages. These work alongside both classic and block themes without modifying your theme files.
 
 = Will it conflict with my existing posts? =
 
-No. Storyly uses a dedicated `story` custom post type. Your existing posts, pages and other content are not affected.
+No. Narrato for Writers uses a dedicated `story` custom post type. Your existing posts, pages and other content are not affected.
 
 = How is reading time calculated? =
 
@@ -65,13 +64,6 @@ Yes. The Story Card and Story Feed blocks can be used on any page or post. The S
 
 Please use the support forum on wordpress.org for bug reports and feature requests.
 
-== Screenshots ==
-
-1. The clean single story reading experience
-2. Story archive page with story cards
-3. Topic archive page
-4. Four Gutenberg blocks in the block inserter
-5. Plugin settings page
 
 == Changelog ==
 
@@ -79,7 +71,6 @@ Please use the support forum on wordpress.org for bug reports and feature reques
 * Initial release
 * Story custom post type with subtitle and reading time meta
 * Topics taxonomy
-* Four Gutenberg blocks: Story Header, Story Card, Story Feed, Reading Time
 * Front-end templates for single story, archive and topic pages
 * Reading progress bar
 * Admin settings page

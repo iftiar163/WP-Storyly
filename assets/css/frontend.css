@@ -1,5 +1,5 @@
 /* ============================================================
-   Storyly — Frontend Styles
+   Narrato for Writers — Frontend Styles
    Version: 1.0.0
    ============================================================ */
 
@@ -7,46 +7,46 @@
    CSS Custom Properties
    ------------------------------------------------------------ */
 :root {
-  --storyly-font-serif:    'Georgia', 'Times New Roman', serif;
-  --storyly-font-sans:     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
-  --storyly-font-size:     20px;
-  --storyly-line-height:   1.8;
-  --storyly-max-width:     680px;
-  --storyly-wide-width:    1080px;
+  --narrato-font-serif:    'Georgia', 'Times New Roman', serif;
+  --narrato-font-sans:     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  --narrato-font-size:     20px;
+  --narrato-line-height:   1.8;
+  --narrato-max-width:     680px;
+  --narrato-wide-width:    1080px;
 
-  --storyly-color-text:        #242424;
-  --storyly-color-subtle:      #6b6b6b;
-  --storyly-color-lighter:     #b3b3b1;
-  --storyly-color-border:      #e6e6e6;
-  --storyly-color-bg:          #ffffff;
-  --storyly-color-bg-alt:      #f9f9f9;
-  --storyly-color-accent:      #1a8917;
-  --storyly-color-topic-bg:    #f2f2f2;
-  --storyly-color-topic-hover: #e6e6e6;
-  --storyly-color-progress:    #242424;
+  --narrato-color-text:        #242424;
+  --narrato-color-subtle:      #6b6b6b;
+  --narrato-color-lighter:     #b3b3b1;
+  --narrato-color-border:      #e6e6e6;
+  --narrato-color-bg:          #ffffff;
+  --narrato-color-bg-alt:      #f9f9f9;
+  --narrato-color-accent:      #1a8917;
+  --narrato-color-topic-bg:    #f2f2f2;
+  --narrato-color-topic-hover: #e6e6e6;
+  --narrato-color-progress:    #242424;
 }
 
 /* ------------------------------------------------------------
    Reset / Base
    ------------------------------------------------------------ */
-.storyly-wrapper *,
-.storyly-wrapper *::before,
-.storyly-wrapper *::after {
+.narrato-wrapper *,
+.narrato-wrapper *::before,
+.narrato-wrapper *::after {
   box-sizing: border-box;
 }
 
-.storyly-wrapper {
-  background-color: var(--storyly-color-bg);
-  color: var(--storyly-color-text);
-  font-family: var(--storyly-font-sans);
+.narrato-wrapper {
+  background-color: var(--narrato-color-bg);
+  color: var(--narrato-color-text);
+  font-family: var(--narrato-font-sans);
   min-height: 100vh;
 }
 
 /* ------------------------------------------------------------
    Layout
    ------------------------------------------------------------ */
-.storyly-container {
-  max-width: var(--storyly-max-width);
+.narrato-container {
+  max-width: var(--narrato-max-width);
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -54,13 +54,13 @@
 /* ------------------------------------------------------------
    Reading Progress Bar
    ------------------------------------------------------------ */
-.storyly-progress-bar {
+.narrato-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   width: 0%;
   height: 3px;
-  background-color: var(--storyly-color-progress);
+  background-color: var(--narrato-color-progress);
   z-index: 9999;
   transition: width 0.1s linear;
 }
@@ -68,66 +68,66 @@
 /* ------------------------------------------------------------
    Single Story — Header
    ------------------------------------------------------------ */
-.storyly-single {
+.narrato-single {
   padding: 48px 0 80px;
 }
 
-.storyly-topics {
+.narrato-topics {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 24px;
 }
 
-.storyly-topic-tag {
+.narrato-topic-tag {
   display: inline-block;
   padding: 4px 12px;
-  background: var(--storyly-color-topic-bg);
-  color: var(--storyly-color-text);
+  background: var(--narrato-color-topic-bg);
+  color: var(--narrato-color-text);
   border-radius: 100px;
   font-size: 13px;
-  font-family: var(--storyly-font-sans);
+  font-family: var(--narrato-font-sans);
   font-weight: 500;
   text-decoration: none;
   transition: background 0.15s ease;
 }
 
-.storyly-topic-tag:hover {
-  background: var(--storyly-color-topic-hover);
+.narrato-topic-tag:hover {
+  background: var(--narrato-color-topic-hover);
 }
 
-.storyly-title {
-  font-family: var(--storyly-font-serif);
+.narrato-title {
+  font-family: var(--narrato-font-serif);
   font-size: clamp(28px, 5vw, 42px);
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.5px;
-  color: var(--storyly-color-text);
+  color: var(--narrato-color-text);
   margin: 0 0 16px;
 }
 
-.storyly-subtitle {
-  font-family: var(--storyly-font-serif);
+.narrato-subtitle {
+  font-family: var(--narrato-font-serif);
   font-size: clamp(18px, 3vw, 22px);
   font-weight: 400;
   line-height: 1.5;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   margin: 0 0 32px;
 }
 
 /* ------------------------------------------------------------
    Single Story — Author Bar
    ------------------------------------------------------------ */
-.storyly-author-bar {
+.narrato-author-bar {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 32px;
   padding-bottom: 32px;
-  border-bottom: 1px solid var(--storyly-color-border);
+  border-bottom: 1px solid var(--narrato-color-border);
 }
 
-.storyly-avatar {
+.narrato-avatar {
   width: 44px !important;
   height: 44px !important;
   border-radius: 50% !important;
@@ -135,7 +135,7 @@
   flex-shrink: 0;
 }
 
-.storyly-avatar-lg {
+.narrato-avatar-lg {
   width: 80px !important;
   height: 80px !important;
   border-radius: 50% !important;
@@ -143,7 +143,7 @@
   flex-shrink: 0;
 }
 
-.storyly-avatar-sm {
+.narrato-avatar-sm {
   width: 24px !important;
   height: 24px !important;
   border-radius: 50% !important;
@@ -151,45 +151,45 @@
   flex-shrink: 0;
 }
 
-.storyly-author-info {
+.narrato-author-info {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.storyly-author-name {
+.narrato-author-name {
   font-size: 15px;
   font-weight: 500;
-  color: var(--storyly-color-text);
+  color: var(--narrato-color-text);
   text-decoration: none;
 }
 
-.storyly-author-name:hover {
+.narrato-author-name:hover {
   text-decoration: underline;
 }
 
-.storyly-meta {
+.narrato-meta {
   font-size: 13px;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.storyly-dot {
-  color: var(--storyly-color-lighter);
+.narrato-dot {
+  color: var(--narrato-color-lighter);
 }
 
 /* ------------------------------------------------------------
    Single Story — Cover Image
    ------------------------------------------------------------ */
-.storyly-cover {
+.narrato-cover {
   margin: 0 0 40px;
   border-radius: 4px;
   overflow: hidden;
 }
 
-.storyly-cover-img {
+.narrato-cover-img {
   width: 100%;
   height: auto;
   display: block;
@@ -198,18 +198,18 @@
 /* ------------------------------------------------------------
    Single Story — Content Typography
    ------------------------------------------------------------ */
-.storyly-content {
-  font-family: var(--storyly-font-serif);
-  font-size: var(--storyly-font-size);
-  line-height: var(--storyly-line-height);
-  color: var(--storyly-color-text);
+.narrato-content {
+  font-family: var(--narrato-font-serif);
+  font-size: var(--narrato-font-size);
+  line-height: var(--narrato-line-height);
+  color: var(--narrato-color-text);
 }
 
-.storyly-content p {
+.narrato-content p {
   margin: 0 0 2em;
 }
 
-.storyly-content h2 {
+.narrato-content h2 {
   font-size: 1.5em;
   font-weight: 700;
   line-height: 1.3;
@@ -217,36 +217,36 @@
   letter-spacing: -0.3px;
 }
 
-.storyly-content h3 {
+.narrato-content h3 {
   font-size: 1.2em;
   font-weight: 700;
   line-height: 1.4;
   margin: 1.6em 0 0.5em;
 }
 
-.storyly-content a {
-  color: var(--storyly-color-text);
+.narrato-content a {
+  color: var(--narrato-color-text);
   text-decoration: underline;
-  text-decoration-color: var(--storyly-color-border);
+  text-decoration-color: var(--narrato-color-border);
   text-underline-offset: 3px;
   transition: text-decoration-color 0.15s ease;
 }
 
-.storyly-content a:hover {
-  text-decoration-color: var(--storyly-color-text);
+.narrato-content a:hover {
+  text-decoration-color: var(--narrato-color-text);
 }
 
-.storyly-content blockquote {
-  border-left: 3px solid var(--storyly-color-text);
+.narrato-content blockquote {
+  border-left: 3px solid var(--narrato-color-text);
   margin: 2em 0;
   padding: 0 0 0 24px;
   font-style: italic;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
 }
 
-.storyly-content pre {
-  background: var(--storyly-color-bg-alt);
-  border: 1px solid var(--storyly-color-border);
+.narrato-content pre {
+  background: var(--narrato-color-bg-alt);
+  border: 1px solid var(--narrato-color-border);
   border-radius: 4px;
   padding: 20px 24px;
   overflow-x: auto;
@@ -255,33 +255,33 @@
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
-.storyly-content code {
-  background: var(--storyly-color-bg-alt);
-  border: 1px solid var(--storyly-color-border);
+.narrato-content code {
+  background: var(--narrato-color-bg-alt);
+  border: 1px solid var(--narrato-color-border);
   border-radius: 3px;
   padding: 2px 6px;
   font-size: 0.85em;
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
 }
 
-.storyly-content pre code {
+.narrato-content pre code {
   background: none;
   border: none;
   padding: 0;
   font-size: inherit;
 }
 
-.storyly-content ul,
-.storyly-content ol {
+.narrato-content ul,
+.narrato-content ol {
   margin: 0 0 2em 1.5em;
   padding: 0;
 }
 
-.storyly-content li {
+.narrato-content li {
   margin-bottom: 0.5em;
 }
 
-.storyly-content img {
+.narrato-content img {
   max-width: 100%;
   height: auto;
   display: block;
@@ -289,41 +289,41 @@
   border-radius: 4px;
 }
 
-.storyly-content figure {
+.narrato-content figure {
   margin: 2em 0;
 }
 
-.storyly-content figcaption {
-  font-family: var(--storyly-font-sans);
+.narrato-content figcaption {
+  font-family: var(--narrato-font-sans);
   font-size: 14px;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   text-align: center;
   margin-top: 10px;
 }
 
-.storyly-content hr {
+.narrato-content hr {
   border: none;
-  border-top: 1px solid var(--storyly-color-border);
+  border-top: 1px solid var(--narrato-color-border);
   margin: 3em 0;
 }
 
 /* ------------------------------------------------------------
    Single Story — Footer Topics
    ------------------------------------------------------------ */
-.storyly-footer-topics {
+.narrato-footer-topics {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 48px;
   padding-top: 32px;
-  border-top: 1px solid var(--storyly-color-border);
+  border-top: 1px solid var(--narrato-color-border);
 }
 
-.storyly-topic-pill {
+.narrato-topic-pill {
   display: inline-block;
   padding: 8px 16px;
-  background: var(--storyly-color-topic-bg);
-  color: var(--storyly-color-text);
+  background: var(--narrato-color-topic-bg);
+  color: var(--narrato-color-text);
   border-radius: 100px;
   font-size: 14px;
   font-weight: 500;
@@ -331,42 +331,42 @@
   transition: background 0.15s ease;
 }
 
-.storyly-topic-pill:hover {
-  background: var(--storyly-color-topic-hover);
+.narrato-topic-pill:hover {
+  background: var(--narrato-color-topic-hover);
 }
 
 /* ------------------------------------------------------------
    Single Story — Author Bio Box
    ------------------------------------------------------------ */
-.storyly-author-box {
+.narrato-author-box {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   margin-top: 48px;
   padding-top: 32px;
-  border-top: 1px solid var(--storyly-color-border);
+  border-top: 1px solid var(--narrato-color-border);
 }
 
-.storyly-author-box-info {
+.narrato-author-box-info {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.storyly-author-box-name {
+.narrato-author-box-name {
   font-size: 18px;
   font-weight: 600;
-  color: var(--storyly-color-text);
+  color: var(--narrato-color-text);
   text-decoration: none;
 }
 
-.storyly-author-box-name:hover {
+.narrato-author-box-name:hover {
   text-decoration: underline;
 }
 
-.storyly-author-box-bio {
+.narrato-author-box-bio {
   font-size: 15px;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   line-height: 1.6;
   margin: 0;
 }
@@ -374,23 +374,23 @@
 /* ------------------------------------------------------------
    Related Stories
    ------------------------------------------------------------ */
-.storyly-related {
-  background: var(--storyly-color-bg-alt);
-  border-top: 1px solid var(--storyly-color-border);
+.narrato-related {
+  background: var(--narrato-color-bg-alt);
+  border-top: 1px solid var(--narrato-color-border);
   padding: 48px 0;
 }
 
-.storyly-related-title {
-  font-family: var(--storyly-font-sans);
+.narrato-related-title {
+  font-family: var(--narrato-font-sans);
   font-size: 16px;
   font-weight: 600;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0 0 24px;
 }
 
-.storyly-card-grid {
+.narrato-card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
@@ -399,52 +399,52 @@
 /* ------------------------------------------------------------
    Story Card
    ------------------------------------------------------------ */
-.storyly-card {
+.narrato-card {
   padding: 24px 0;
-  border-bottom: 1px solid var(--storyly-color-border);
+  border-bottom: 1px solid var(--narrato-color-border);
 }
 
-.storyly-card:last-child {
+.narrato-card:last-child {
   border-bottom: none;
 }
 
-.storyly-card-body {
+.narrato-card-body {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.storyly-card-author {
+.narrato-card-author {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.storyly-card-author-name {
+.narrato-card-author-name {
   font-size: 13px;
   font-weight: 500;
-  color: var(--storyly-color-text);
+  color: var(--narrato-color-text);
   text-decoration: none;
 }
 
-.storyly-card-author-name:hover {
+.narrato-card-author-name:hover {
   text-decoration: underline;
 }
 
-.storyly-card-inner {
+.narrato-card-inner {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
 }
 
-.storyly-card-text {
+.narrato-card-text {
   flex: 1;
   min-width: 0;
 }
 
-.storyly-card-title {
-  font-family: var(--storyly-font-serif);
+.narrato-card-title {
+  font-family: var(--narrato-font-serif);
   font-size: 20px;
   font-weight: 700;
   line-height: 1.3;
@@ -452,18 +452,18 @@
   letter-spacing: -0.2px;
 }
 
-.storyly-card-title a {
-  color: var(--storyly-color-text);
+.narrato-card-title a {
+  color: var(--narrato-color-text);
   text-decoration: none;
 }
 
-.storyly-card-title a:hover {
+.narrato-card-title a:hover {
   text-decoration: underline;
 }
 
-.storyly-card-subtitle {
+.narrato-card-subtitle {
   font-size: 15px;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   line-height: 1.5;
   margin: 0 0 12px;
   display: -webkit-box;
@@ -472,30 +472,30 @@
   overflow: hidden;
 }
 
-.storyly-card-meta {
+.narrato-card-meta {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
 }
 
-.storyly-card-topic {
-  color: var(--storyly-color-text);
+.narrato-card-topic {
+  color: var(--narrato-color-text);
   font-weight: 500;
   text-decoration: none;
 }
 
-.storyly-card-topic:hover {
+.narrato-card-topic:hover {
   text-decoration: underline;
 }
 
-.storyly-card-thumb-link {
+.narrato-card-thumb-link {
   flex-shrink: 0;
   display: block;
 }
 
-.storyly-card-thumb {
+.narrato-card-thumb {
   width: 112px !important;
   height: 84px !important;
   object-fit: cover !important;
@@ -506,60 +506,60 @@
 /* ------------------------------------------------------------
    Archive & Topic Header
    ------------------------------------------------------------ */
-.storyly-archive-header {
+.narrato-archive-header {
   padding: 48px 0 32px;
-  border-bottom: 1px solid var(--storyly-color-border);
+  border-bottom: 1px solid var(--narrato-color-border);
   margin-bottom: 0;
 }
 
-.storyly-archive-title {
-  font-family: var(--storyly-font-serif);
+.narrato-archive-title {
+  font-family: var(--narrato-font-serif);
   font-size: clamp(28px, 5vw, 42px);
   font-weight: 700;
   letter-spacing: -0.5px;
   margin: 0;
-  color: var(--storyly-color-text);
+  color: var(--narrato-color-text);
 }
 
-.storyly-topic-label {
+.narrato-topic-label {
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   margin: 0 0 8px;
 }
 
-.storyly-topic-desc {
+.narrato-topic-desc {
   font-size: 16px;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   margin: 12px 0 0;
   line-height: 1.6;
 }
 
-.storyly-topic-count {
+.narrato-topic-count {
   font-size: 14px;
-  color: var(--storyly-color-lighter);
+  color: var(--narrato-color-lighter);
   margin: 8px 0 0;
 }
 
 /* ------------------------------------------------------------
    Feed
    ------------------------------------------------------------ */
-.storyly-feed {
+.narrato-feed {
   padding: 0;
 }
 
-.storyly-no-stories {
+.narrato-no-stories {
   padding: 48px 0;
-  color: var(--storyly-color-subtle);
+  color: var(--narrato-color-subtle);
   font-size: 16px;
 }
 
 /* ------------------------------------------------------------
    Pagination
    ------------------------------------------------------------ */
-.storyly-pagination {
+.narrato-pagination {
   padding: 48px 0 32px;
   display: flex;
   justify-content: center;
@@ -567,48 +567,48 @@
   flex-wrap: wrap;
 }
 
-.storyly-pagination .page-numbers {
+.narrato-pagination .page-numbers {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
-  border: 1px solid var(--storyly-color-border);
+  border: 1px solid var(--narrato-color-border);
   border-radius: 100px;
   font-size: 14px;
-  color: var(--storyly-color-text);
+  color: var(--narrato-color-text);
   text-decoration: none;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-.storyly-pagination .page-numbers:hover,
-.storyly-pagination .page-numbers.current {
-  background: var(--storyly-color-text);
-  color: var(--storyly-color-bg);
-  border-color: var(--storyly-color-text);
+.narrato-pagination .page-numbers:hover,
+.narrato-pagination .page-numbers.current {
+  background: var(--narrato-color-text);
+  color: var(--narrato-color-bg);
+  border-color: var(--narrato-color-text);
 }
 
 /* ------------------------------------------------------------
    Responsive
    ------------------------------------------------------------ */
 @media ( max-width: 640px ) {
-  .storyly-container {
+  .narrato-container {
     padding: 0 16px;
   }
 
-  .storyly-card-thumb {
+  .narrato-card-thumb {
     width: 80px !important;
     height: 60px !important;
   }
 
-  .storyly-card-title {
+  .narrato-card-title {
     font-size: 17px;
   }
 
-  .storyly-author-box {
+  .narrato-author-box {
     flex-direction: column;
   }
 
-  .storyly-card-grid {
+  .narrato-card-grid {
     grid-template-columns: 1fr;
   }
 }

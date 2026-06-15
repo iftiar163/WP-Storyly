@@ -1,10 +1,10 @@
 ( function () {
   'use strict';
 
-  var bar = document.getElementById( 'storyly-progress' );
+  var bar = document.getElementById( 'narrato-progress' );
   if ( ! bar ) return;
 
-  var content = document.querySelector( '.storyly-content' );
+  var content = document.querySelector( '.narrato-content' );
   if ( ! content ) return;
 
   function updateProgress() {

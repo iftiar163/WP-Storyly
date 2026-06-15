@@ -1,5 +1,5 @@
 <?php
-namespace Storyly\Taxonomy;
+namespace Narrato\Taxonomy;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,20 +11,20 @@ final class Topic {
 
     public function register_taxonomy(): void {
         $labels = [
-            'name'                       => __( 'Topics',                           'storyly' ),
-            'singular_name'              => __( 'Topic',                            'storyly' ),
-            'search_items'               => __( 'Search Topics',                    'storyly' ),
-            'popular_items'              => __( 'Popular Topics',                   'storyly' ),
-            'all_items'                  => __( 'All Topics',                       'storyly' ),
-            'edit_item'                  => __( 'Edit Topic',                       'storyly' ),
-            'update_item'                => __( 'Update Topic',                     'storyly' ),
-            'add_new_item'               => __( 'Add New Topic',                    'storyly' ),
-            'new_item_name'              => __( 'New Topic Name',                   'storyly' ),
-            'separate_items_with_commas' => __( 'Separate topics with commas',      'storyly' ),
-            'add_or_remove_items'        => __( 'Add or remove topics',             'storyly' ),
-            'choose_from_most_used'      => __( 'Choose from the most used topics', 'storyly' ),
-            'not_found'                  => __( 'No topics found.',                 'storyly' ),
-            'menu_name'                  => __( 'Topics',                           'storyly' ),
+            'name'                       => __( 'Topics',                           'narrato-for-writers' ),
+            'singular_name'              => __( 'Topic',                            'narrato-for-writers' ),
+            'search_items'               => __( 'Search Topics',                    'narrato-for-writers' ),
+            'popular_items'              => __( 'Popular Topics',                   'narrato-for-writers' ),
+            'all_items'                  => __( 'All Topics',                       'narrato-for-writers' ),
+            'edit_item'                  => __( 'Edit Topic',                       'narrato-for-writers' ),
+            'update_item'                => __( 'Update Topic',                     'narrato-for-writers' ),
+            'add_new_item'               => __( 'Add New Topic',                    'narrato-for-writers' ),
+            'new_item_name'              => __( 'New Topic Name',                   'narrato-for-writers' ),
+            'separate_items_with_commas' => __( 'Separate topics with commas',      'narrato-for-writers' ),
+            'add_or_remove_items'        => __( 'Add or remove topics',             'narrato-for-writers' ),
+            'choose_from_most_used'      => __( 'Choose from the most used topics', 'narrato-for-writers' ),
+            'not_found'                  => __( 'No topics found.',                 'narrato-for-writers' ),
+            'menu_name'                  => __( 'Topics',                           'narrato-for-writers' ),
         ];
 
         $args = [
@@ -41,12 +41,12 @@ final class Topic {
             'rewrite'           => [ 'slug' => 'topic', 'with_front' => false ],
         ];
 
-        register_taxonomy( 'storyly_topic', [ 'story' ], $args );
+        register_taxonomy( 'narrato_topic', [ 'story' ], $args );
     }
 
     public function load_template( string $template ) : string {
-        if ( is_tax( 'storyly_topic' ) ) {
-            $custom = STORYLY_PATH . 'templates/taxonomy-topic.php';
+        if ( is_tax( 'narrato_topic' ) ) {
+            $custom = NARRATO_PATH . 'templates/taxonomy-topic.php';
             if ( file_exists( $custom ) ) {
                 return $custom;
             }

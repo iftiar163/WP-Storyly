@@ -1,5 +1,5 @@
 <?php
-namespace Storyly;
+namespace Narrato;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,15 +11,15 @@ final class Assets {
     }
 
     public function enqueue_frontend(): void {
-        if ( ! $this->is_storyly_page() ) {
+        if ( ! $this->is_narrato_page() ) {
             return;
         }
 
         wp_enqueue_style(
-            'storyly-frontend',
-            STORYLY_URL . 'assets/css/frontend.css',
+            'narrato-frontend',
+            NARRATO_URL . 'assets/css/frontend.css',
             [],
-            STORYLY_VERSION
+            NARRATO_VERSION
         );
     }
 
@@ -34,16 +34,16 @@ final class Assets {
         }
 
         wp_enqueue_style(
-            'storyly-editor',
-            STORYLY_URL . 'assets/css/editor.css',
+            'narrato-editor',
+            NARRATO_URL . 'assets/css/editor.css',
             [ 'wp-edit-blocks' ],
-            STORYLY_VERSION
+            NARRATO_VERSION
         );
     }
 
-    private function is_storyly_page(): bool {
+    private function is_narrato_page(): bool {
         return is_singular( 'story' )
             || is_post_type_archive( 'story' )
-            || is_tax( 'storyly_topic' );
+            || is_tax( 'narrato_topic' );
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Storyly;
+namespace Narrato;
 
 defined( 'ABSPATH' ) || exit;
 

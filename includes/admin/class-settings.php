@@ -1,27 +1,27 @@
 <?php
 
-namespace Storyly\Admin;
+namespace Narrato\Admin;
 
 defined('ABSPATH') || exit;
 
 final class Settings
 {
-    private const OPTION_GROUP = 'wp_storyly_settings';
-    private const OPTION_NAME = 'wp_storyly_options';
-    private const PAGE_SLUG = 'storyly-settings';
+    private const OPTION_GROUP = 'wp_narrato_settings';
+    private const OPTION_NAME = 'wp_narrato_options';
+    private const PAGE_SLUG = 'narrato-settings';
 
     public function register(): void
     {
         add_action('admin_menu', [$this, 'add_menu_page']);
         add_action('admin_init', [$this, 'register_settings']);
-        add_filter('plugin_action_links_' . STORYLY_BASENAME, [$this, 'add_settings_link']);
+        add_filter('plugin_action_links_' . NARRATO_BASENAME, [$this, 'add_settings_link']);
     }
 
     public function add_menu_page(): void
     {
         add_menu_page(
-            __('Storyly Settings', 'storyly'),
-            __('Storyly', 'storyly'),
+            __('Narrato Settings', 'narrato-for-writers'),
+            __('Narrato', 'narrato-for-writers'),
             'manage_options',
             self::PAGE_SLUG,
             [$this, 'render_page']
@@ -40,66 +40,66 @@ final class Settings
         );
 
         add_settings_section(
-            'storyly_section_reading',
-            __('Reading Experience', 'storyly'),
+            'narrato_section_reading',
+            __('Reading Experience', 'narrato-for-writers'),
             '__return_false',
             self::PAGE_SLUG,
         );
 
         add_settings_field(
             'stories_per_page',
-            __('Stories Per Page', 'storyly'),
+            __('Stories Per Page', 'narrato-for-writers'),
             [$this, 'field_stories_per_page'],
             self::PAGE_SLUG,
-            'storyly_section_reading'
+            'narrato_section_reading'
         );
 
         add_settings_field(
             'show_reading_time',
-            __('Show Reading Time', 'storyly'),
+            __('Show Reading Time', 'narrato-for-writers'),
             [$this, 'field_show_reading_time'],
             self::PAGE_SLUG,
-            'storyly_section_reading'
+            'narrato_section_reading'
         );
 
         add_settings_field(
             'show_progress_bar',
-            __('Show reading progress bar', 'storyly'),
+            __('Show reading progress bar', 'narrato-for-writers'),
             [$this, 'field_show_progress_bar'],
             self::PAGE_SLUG,
-            'storyly_section_reading'
+            'narrato_section_reading'
         );
 
         // Section: Archive
         add_settings_section(
-            'storyly_section_archive',
-            __('Archive & Feed', 'storyly'),
+            'narrato_section_archive',
+            __('Archive & Feed', 'narrato-for-writers'),
             '__return_false',
             self::PAGE_SLUG
         );
 
         add_settings_field(
             'archive_slug',
-            __('Stories Archive Slug', 'storyly'),
+            __('Stories Archive Slug', 'narrato-for-writers'),
             [$this, 'field_archive_slug'],
             self::PAGE_SLUG,
-            'storyly_section_archive'
+            'narrato_section_archive'
         );
 
         add_settings_field(
             'show_author_bio',
-            __('Show author bio on single story', 'storyly'),
+            __('Show author bio on single story', 'narrato-for-writers'),
             [$this, 'field_show_author_bio'],
             self::PAGE_SLUG,
-            'storyly_section_archive'
+            'narrato_section_archive'
         );
 
         add_settings_field(
             'show_related',
-            __('Show related stories', 'storyly'),
+            __('Show related stories', 'narrato-for-writers'),
             [$this, 'field_show_related'],
             self::PAGE_SLUG,
-            'storyly_section_archive'
+            'narrato_section_archive'
         );
     }
 
@@ -115,7 +115,7 @@ final class Settings
             max="50"
             class="small-text" />
         <p class="description">
-            <?php esc_html_e('Number of stories shown on archive and topic pages.', 'storyly'); ?>
+            <?php esc_html_e('Number of stories shown on archive and topic pages.', 'narrato-for-writers'); ?>
         </p>
     <?php
     }
@@ -130,7 +130,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_reading_time]"
                 value="1"
                 <?php checked(1, $options['show_reading_time']) ?>>
-            <?php esc_html_e('Display estimated reading time on story cards and single pages.', 'storyly'); ?>
+            <?php esc_html_e('Display estimated reading time on story cards and single pages.', 'narrato-for-writers'); ?>
         </label>
 
     <?php
@@ -146,7 +146,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_progress_bar]"
                 value="1"
                 <?php checked(1, $options['show_progress_bar']); ?> />
-            <?php esc_html_e('Show a reading progress bar at the top of single story pages.', 'storyly'); ?>
+            <?php esc_html_e('Show a reading progress bar at the top of single story pages.', 'narrato-for-writers'); ?>
         </label>
     <?php
     }
@@ -161,7 +161,7 @@ final class Settings
             value="<?php echo esc_attr($options['archive_slug']); ?>"
             class="regular-text" />
         <p class="description">
-            <?php esc_html_e('URL slug for the stories archive. Save changes then go to Settings → Permalinks and click Save to flush rewrite rules.', 'storyly'); ?>
+            <?php esc_html_e('URL slug for the stories archive. Save changes then go to Settings → Permalinks and click Save to flush rewrite rules.', 'narrato-for-writers'); ?>
         </p>
     <?php
     }
@@ -176,7 +176,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_author_bio]"
                 value="1"
                 <?php checked(1, $options['show_author_bio']); ?> />
-            <?php esc_html_e('Display the author biography box below each story.', 'storyly'); ?>
+            <?php esc_html_e('Display the author biography box below each story.', 'narrato-for-writers'); ?>
         </label>
     <?php
     }
@@ -191,7 +191,7 @@ final class Settings
                 name="<?php echo esc_attr(self::OPTION_NAME); ?>[show_related]"
                 value="1"
                 <?php checked(1, $options['show_related']); ?> />
-            <?php esc_html_e('Show related stories section at the bottom of each story.', 'storyly'); ?>
+            <?php esc_html_e('Show related stories section at the bottom of each story.', 'narrato-for-writers'); ?>
         </label>
     <?php
     }
@@ -205,7 +205,7 @@ final class Settings
     ?>
         <div class="wrap">
             <h1>
-                <?php esc_html_e('Storyly Settings', 'storyly'); ?>
+                <?php esc_html_e('Narrato Settings', 'narrato-for-writers'); ?>
             </h1>
 
             <?php settings_errors(self::OPTION_GROUP); ?>
@@ -214,7 +214,7 @@ final class Settings
                 <?php
                 settings_fields(self::OPTION_GROUP);
                 do_settings_sections(self::PAGE_SLUG);
-                submit_button(__('Save Settings', 'storyly'));
+                submit_button(__('Save Settings', 'narrato-for-writers'));
                 ?>
             </form>
         </div>
@@ -243,23 +243,26 @@ final class Settings
 
     public static function get_options(): array
     {
-        return [
-            'stories_per_page' => 10,
-            'show_reading_time' => 1,
-            'show_progress_bar' => 1,
-            'show_author_bio'   => 1,
-            'show_related'      => 1,
-            'archive_slug'      => 'stories',
-        ];
+        return wp_parse_args(
+            get_option( self::OPTION_NAME, [] ),
+            [
+                'stories_per_page' => 10,
+                'show_reading_time' => 1,
+                'show_progress_bar' => 1,
+                'show_author_bio'   => 1,
+                'show_related'      => 1,
+                'archive_slug'      => 'stories',
+            ]
+        );
     }
 
     public function add_settings_link(array $links): array
     {
-        $url = admin_url('options-general.php?page=' . self::PAGE_SLUG);
+        $url = admin_url('admin.php?page=' . self::PAGE_SLUG);
         $link = sprintf(
             '<a href="%s">%s</a>',
             esc_url($url),
-            esc_html__('Settings', 'storyly')
+            esc_html__('Settings', 'narrato-for-writers')
         );
         array_unshift($links, $link);
         return $links;

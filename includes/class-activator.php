@@ -1,6 +1,6 @@
 <?php
 
-namespace Storyly;
+namespace Narrato;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,9 +11,9 @@ final class Activator{
     }
 
     private static function create_default_topics() : void {
-        if(!taxonomy_exists('storyly_topics')){
-            register_taxonomy('storyly_topics', ['storyly'], [
-                'label' => __('Topics', 'storyly'),
+        if(!taxonomy_exists('narrato_topic')){
+            register_taxonomy('narrato_topic', ['story'], [
+                'label' => __('Topics', 'narrato-for-writers'),
                 'public' => true,
                 'hierarchical' => true,
                 'show_ui' => true,
@@ -23,8 +23,8 @@ final class Activator{
 
         $default_topics = ['Technology', 'Health', 'Travel', 'Food', 'Culture'];
         foreach($default_topics as $topic){
-            if(!term_exists($topic, 'storyly_topics')){
-                wp_insert_term($topic, 'storyly_topics');
+            if(!term_exists($topic, 'narrato_topic')){
+                wp_insert_term($topic, 'narrato_topic');
             }
         }
     }

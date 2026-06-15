@@ -1,5 +1,5 @@
 <?php
-namespace Storyly\Meta;
+namespace Narrato\Meta;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -13,9 +13,9 @@ final class Story {
 
     public function register_meta_fields(): void {
         // Subtitle
-        register_post_meta( 'story', '_storyly_subtitle', [
+        register_post_meta( 'story', '_narrato_subtitle', [
             'type'              => 'string',
-            'description'       => __( 'Story subtitle', 'storyly' ),
+            'description'       => __( 'Story subtitle', 'narrato-for-writers' ),
             'single'            => true,
             'default'           => '',
             'sanitize_callback' => 'sanitize_text_field',
@@ -24,9 +24,9 @@ final class Story {
         ] );
 
         // Reading time (minutes) — auto-calculated
-        register_post_meta( 'story', '_storyly_reading_time', [
+        register_post_meta( 'story', '_narrato_reading_time', [
             'type'              => 'integer',
-            'description'       => __( 'Estimated reading time in minutes', 'storyly' ),
+            'description'       => __( 'Estimated reading time in minutes', 'narrato-for-writers' ),
             'single'            => true,
             'default'           => 1,
             'sanitize_callback' => 'absint',
@@ -37,8 +37,8 @@ final class Story {
 
     public function register_meta_boxes(): void {
         add_meta_box(
-            'storyly_subtitle',
-            __('Story Subtitle', 'storyly'),
+            'narrato_subtitle',
+            __('Story Subtitle', 'narrato-for-writers'),
             [$this, 'render_subtitle_field'],
             'story',
             'normal',
@@ -47,15 +47,15 @@ final class Story {
     }
 
     public function render_subtitle_field( \WP_Post $post ): void {
-        $subtitle = get_post_meta( $post->ID, '_storyly_subtitle', true );
-        wp_nonce_field( 'storyly_subtitle_nonce', 'storyly_subtitle_nonce' );
+        $subtitle = get_post_meta( $post->ID, '_narrato_subtitle', true );
+        wp_nonce_field( 'narrato_subtitle_nonce', 'narrato_subtitle_nonce' );
         ?>
         <input 
             type="text" 
-            id="storyly_subtitle" 
-            name="storyly_subtitle" 
+            id="narrato_subtitle" 
+            name="narrato_subtitle" 
             value="<?php echo esc_attr( $subtitle ); ?>" 
-            placeholder="<?php esc_attr_e( 'Enter story subtitle', 'storyly' ); ?>"
+            placeholder="<?php esc_attr_e( 'Enter story subtitle', 'narrato-for-writers' ); ?>"
             style="width: 100%; padding: 8px; font-size: 14px;"
         />
         <?php
@@ -72,7 +72,7 @@ final class Story {
         }
 
         // Verify nonce
-        if ( ! isset( $_POST['storyly_subtitle_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['storyly_subtitle_nonce'] ) ), 'storyly_subtitle_nonce' ) ) {
+        if ( ! isset( $_POST['narrato_subtitle_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['narrato_subtitle_nonce'] ) ), 'narrato_subtitle_nonce' ) ) {
             return;
         }
 
@@ -82,11 +82,11 @@ final class Story {
         }
 
         // Save subtitle
-        if ( isset( $_POST['storyly_subtitle'] ) ) {
-            $subtitle = sanitize_text_field( wp_unslash( $_POST['storyly_subtitle'] ) );
-            update_post_meta( $post_id, '_storyly_subtitle', $subtitle );
+        if ( isset( $_POST['narrato_subtitle'] ) ) {
+            $subtitle = sanitize_text_field( wp_unslash( $_POST['narrato_subtitle'] ) );
+            update_post_meta( $post_id, '_narrato_subtitle', $subtitle );
         } else {
-            delete_post_meta( $post_id, '_storyly_subtitle' );
+            delete_post_meta( $post_id, '_narrato_subtitle' );
         }
     }
 
@@ -105,6 +105,6 @@ final class Story {
         $reading_time = (int) ceil( $word_count / 200 ); // 200 wpm average
         $reading_time = max( 1, $reading_time );          // minimum 1 min
 
-        update_post_meta( $post_id, '_storyly_reading_time', $reading_time );
+        update_post_meta( $post_id, '_narrato_reading_time', $reading_time );
     }
 }

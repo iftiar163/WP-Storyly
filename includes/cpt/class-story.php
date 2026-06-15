@@ -1,5 +1,5 @@
 <?php
-namespace Storyly\CPT;
+namespace Narrato\CPT;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,20 +11,20 @@ final class Story {
 
     public function register_post_type(): void {
     $labels = [
-        'name'                  => __( 'Stories',                   'storyly' ),
-        'singular_name'         => __( 'Story',                     'storyly' ),
-        'add_new'               => __( 'New Story',                 'storyly' ),
-        'add_new_item'          => __( 'Add New Story',             'storyly' ),
-        'edit_item'             => __( 'Edit Story',                'storyly' ),
-        'new_item'              => __( 'New Story',                 'storyly' ),
-        'view_item'             => __( 'View Story',                'storyly' ),
-        'view_items'            => __( 'View Stories',              'storyly' ),
-        'search_items'          => __( 'Search Stories',            'storyly' ),
-        'not_found'             => __( 'No stories found.',         'storyly' ),
-        'not_found_in_trash'    => __( 'No stories found in Trash.','storyly' ),
-        'all_items'             => __( 'All Stories',               'storyly' ),
-        'menu_name'             => __( 'Stories',                   'storyly' ),
-        'name_admin_bar'        => __( 'Story',                     'storyly' ),
+        'name'                  => __( 'Stories',                   'narrato-for-writers' ),
+        'singular_name'         => __( 'Story',                     'narrato-for-writers' ),
+        'add_new'               => __( 'New Story',                 'narrato-for-writers' ),
+        'add_new_item'          => __( 'Add New Story',             'narrato-for-writers' ),
+        'edit_item'             => __( 'Edit Story',                'narrato-for-writers' ),
+        'new_item'              => __( 'New Story',                 'narrato-for-writers' ),
+        'view_item'             => __( 'View Story',                'narrato-for-writers' ),
+        'view_items'            => __( 'View Stories',              'narrato-for-writers' ),
+        'search_items'          => __( 'Search Stories',            'narrato-for-writers' ),
+        'not_found'             => __( 'No stories found.',         'narrato-for-writers' ),
+        'not_found_in_trash'    => __( 'No stories found in Trash.','narrato-for-writers' ),
+        'all_items'             => __( 'All Stories',               'narrato-for-writers' ),
+        'menu_name'             => __( 'Stories',                   'narrato-for-writers' ),
+        'name_admin_bar'        => __( 'Story',                     'narrato-for-writers' ),
     ];
 
     $args = [
@@ -58,14 +58,14 @@ final class Story {
 
     public function load_template( string $template) : string {
         if(is_singular('story')){
-            $custom = STORYLY_PATH . 'templates/single-story.php';
+            $custom = NARRATO_PATH . 'templates/single-story.php';
             if(file_exists($custom)){
                 return $custom;
             }
         }
 
         if(is_post_type_archive('story')){
-            $custom = STORYLY_PATH . 'templates/archive-story.php';
+            $custom = NARRATO_PATH . 'templates/archive-story.php';
             if(file_exists($custom)){
                 return $custom;
             }

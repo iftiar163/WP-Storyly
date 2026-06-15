@@ -3,52 +3,52 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 
-$storyly_topic = get_queried_object();
+$narrato_topic = get_queried_object();
 ?>
 
-<div class="storyly-wrapper">
-    <div class="storyly-container">
+<div class="narrato-wrapper">
+    <div class="narrato-container">
 
-        <header class="storyly-archive-header">
-            <p class="storyly-topic-label">
-                <?php esc_html_e( 'Topic', 'storyly' ); ?>
+        <header class="narrato-archive-header">
+            <p class="narrato-topic-label">
+                <?php esc_html_e( 'Topic', 'narrato-for-writers' ); ?>
             </p>
-            <h1 class="storyly-archive-title">
-                <?php echo esc_html( $storyly_topic->name ); ?>
+            <h1 class="narrato-archive-title">
+                <?php echo esc_html( $narrato_topic->name ); ?>
             </h1>
-            <?php if ( $storyly_topic->description ) : ?>
-                <p class="storyly-topic-desc">
-                    <?php echo esc_html( $storyly_topic->description ); ?>
+            <?php if ( $narrato_topic->description ) : ?>
+                <p class="narrato-topic-desc">
+                    <?php echo esc_html( $narrato_topic->description ); ?>
                 </p>
             <?php endif; ?>
-            <p class="storyly-topic-count">
+            <p class="narrato-topic-count">
                 <?php printf(
                     /* translators: %s: number of stories */
-                    esc_html( _n( '%s story', '%s stories', $storyly_topic->count, 'storyly' ) ),
-                    esc_html( number_format_i18n( $storyly_topic->count ) )
+                    esc_html( _n( '%s story', '%s stories', $narrato_topic->count, 'narrato-for-writers' ) ),
+                    esc_html( number_format_i18n( $narrato_topic->count ) )
                 ); ?>
             </p>
         </header>
 
         <?php if ( have_posts() ) : ?>
-            <div class="storyly-feed">
+            <div class="narrato-feed">
                 <?php while ( have_posts() ) : the_post(); ?>
-                    <?php include STORYLY_PATH . 'templates/partials/story-card.php'; ?>
+                    <?php include NARRATO_PATH . 'templates/partials/story-card.php'; ?>
                 <?php endwhile; ?>
             </div>
 
-            <nav class="storyly-pagination">
+            <nav class="narrato-pagination">
                 <?php
                 echo wp_kses_post( paginate_links( [
-                    'prev_text' => esc_html__( '← Older', 'storyly' ),
-                    'next_text' => esc_html__( 'Newer →', 'storyly' ),
+                    'prev_text' => esc_html__( '← Older', 'narrato-for-writers' ),
+                    'next_text' => esc_html__( 'Newer →', 'narrato-for-writers' ),
                 ] ) );
                 ?>
             </nav>
 
         <?php else : ?>
-            <p class="storyly-no-stories">
-                <?php esc_html_e( 'No stories in this topic yet.', 'storyly' ); ?>
+            <p class="narrato-no-stories">
+                <?php esc_html_e( 'No stories in this topic yet.', 'narrato-for-writers' ); ?>
             </p>
         <?php endif; ?>
 

@@ -3,64 +3,64 @@ defined('ABSPATH') || exit;
 
 get_header();
 
-$storyly_options = \Storyly\Admin\Settings::get_options();
+$narrato_options = \Narrato\Admin\Settings::get_options();
 
 while (have_posts()) :
     the_post();
-    $storyly_subtitle = get_post_meta(get_the_ID(), '_storyly_subtitle', true);
-    $storyly_reading_time = get_post_meta(get_the_ID(), '_storyly_reading_time', true) ?: 1;
-    $storyly_topics = get_the_terms(get_the_ID(), 'storyly_topic');
-    $storyly_author_id = get_the_author_meta('ID');
+    $narrato_subtitle = get_post_meta(get_the_ID(), '_narrato_subtitle', true);
+    $narrato_reading_time = get_post_meta(get_the_ID(), '_narrato_reading_time', true) ?: 1;
+    $narrato_topics = get_the_terms(get_the_ID(), 'narrato_topic');
+    $narrato_author_id = get_the_author_meta('ID');
 ?>
-    <div class="storyly-wrapper">
-        <article id="story-<?php the_ID(); ?>" <?php post_class('storyly-single'); ?>>
+    <div class="narrato-wrapper">
+        <article id="story-<?php the_ID(); ?>" <?php post_class('narrato-single'); ?>>
 
             <!-- Reading progress bar -->
-            <?php if ($storyly_options['show_progress_bar']) : ?>
-                <div class="storyly-progress-bar" id="storyly-progress"></div>
+            <?php if ($narrato_options['show_progress_bar']) : ?>
+                <div class="narrato-progress-bar" id="narrato-progress"></div>
             <?php endif; ?>
 
-            <div class="storyly-container">
+            <div class="narrato-container">
 
                 <!-- Topics -->
-                <?php if (! empty($storyly_topics) && ! is_wp_error($storyly_topics)) : ?>
-                    <div class="storyly-topics">
-                        <?php foreach ($storyly_topics as $storyly_topic) : ?>
-                            <a href="<?php echo esc_url(get_term_link($storyly_topic)); ?>"
-                                class="storyly-topic-tag">
-                                <?php echo esc_html($storyly_topic->name); ?>
+                <?php if (! empty($narrato_topics) && ! is_wp_error($narrato_topics)) : ?>
+                    <div class="narrato-topics">
+                        <?php foreach ($narrato_topics as $narrato_topic) : ?>
+                            <a href="<?php echo esc_url(get_term_link($narrato_topic)); ?>"
+                                class="narrato-topic-tag">
+                                <?php echo esc_html($narrato_topic->name); ?>
                             </a>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
 
                 <!-- Title -->
-                <h1 class="storyly-title"><?php the_title(); ?></h1>
+                <h1 class="narrato-title"><?php the_title(); ?></h1>
 
                 <!-- Subtitle -->
-                <?php if ($storyly_subtitle) : ?>
-                    <p class="storyly-subtitle"><?php echo esc_html($storyly_subtitle); ?></p>
+                <?php if ($narrato_subtitle) : ?>
+                    <p class="narrato-subtitle"><?php echo esc_html($narrato_subtitle); ?></p>
                 <?php endif; ?>
 
                 <!-- Author bar -->
-                <div class="storyly-author-bar">
-                    <a href="<?php echo esc_url(get_author_posts_url($storyly_author_id)); ?>">
-                        <?php echo get_avatar($storyly_author_id, 44, '', '', ['class' => 'storyly-avatar']); ?>
+                <div class="narrato-author-bar">
+                    <a href="<?php echo esc_url(get_author_posts_url($narrato_author_id)); ?>">
+                        <?php echo get_avatar($narrato_author_id, 44, '', '', ['class' => 'narrato-avatar']); ?>
                     </a>
-                    <div class="storyly-author-info">
-                        <a href="<?php echo esc_url(get_author_posts_url($storyly_author_id)); ?>"
-                            class="storyly-author-name">
+                    <div class="narrato-author-info">
+                        <a href="<?php echo esc_url(get_author_posts_url($narrato_author_id)); ?>"
+                            class="narrato-author-name">
                             <?php the_author(); ?>
                         </a>
-                        <div class="storyly-meta">
+                        <div class="narrato-meta">
                             <span><?php echo esc_html(
                                         get_the_date('M j, Y')
                                     ); ?></span>
-                            <span class="storyly-dot">·</span>
+                            <span class="narrato-dot">·</span>
                             <span><?php printf(
                                         /* translators: %d: number of minutes */
-                                        esc_html__('%d min read', 'storyly'),
-                                        (int) $storyly_reading_time
+                                        esc_html__('%d min read', 'narrato-for-writers'),
+                                        (int) $narrato_reading_time
                                     ); ?></span>
                         </div>
                     </div>
@@ -68,51 +68,51 @@ while (have_posts()) :
 
                 <!-- Featured image -->
                 <?php if (has_post_thumbnail()) : ?>
-                    <div class="storyly-cover">
-                        <?php the_post_thumbnail('full', ['class' => 'storyly-cover-img']); ?>
+                    <div class="narrato-cover">
+                        <?php the_post_thumbnail('full', ['class' => 'narrato-cover-img']); ?>
                     </div>
                 <?php endif; ?>
 
                 <!-- Content -->
-                <div class="storyly-content">
+                <div class="narrato-content">
                     <?php the_content(); ?>
                 </div>
 
                 <!-- Footer: topics -->
-                <?php if (! empty($storyly_topics) && ! is_wp_error($storyly_topics)) : ?>
-                    <div class="storyly-footer-topics">
-                        <?php foreach ($storyly_topics as $storyly_topic) : ?>
-                            <a href="<?php echo esc_url(get_term_link($storyly_topic)); ?>"
-                                class="storyly-topic-pill">
-                                <?php echo esc_html($storyly_topic->name); ?>
+                <?php if (! empty($narrato_topics) && ! is_wp_error($narrato_topics)) : ?>
+                    <div class="narrato-footer-topics">
+                        <?php foreach ($narrato_topics as $narrato_topic) : ?>
+                            <a href="<?php echo esc_url(get_term_link($narrato_topic)); ?>"
+                                class="narrato-topic-pill">
+                                <?php echo esc_html($narrato_topic->name); ?>
                             </a>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
 
                 <!-- Author bio box -->
-                <?php if ($storyly_options['show_author_bio']) : ?>
-                    <div class="storyly-author-box">
-                        <?php echo get_avatar($storyly_author_id, 80, '', '', ['class' => 'storyly-avatar-lg']); ?>
-                        <div class="storyly-author-box-info">
-                            <a href="<?php echo esc_url(get_author_posts_url($storyly_author_id)); ?>"
-                                class="storyly-author-box-name">
+                <?php if ($narrato_options['show_author_bio']) : ?>
+                    <div class="narrato-author-box">
+                        <?php echo get_avatar($narrato_author_id, 80, '', '', ['class' => 'narrato-avatar-lg']); ?>
+                        <div class="narrato-author-box-info">
+                            <a href="<?php echo esc_url(get_author_posts_url($narrato_author_id)); ?>"
+                                class="narrato-author-box-name">
                                 <?php the_author(); ?>
                             </a>
-                            <p class="storyly-author-box-bio">
+                            <p class="narrato-author-box-bio">
                                 <?php echo esc_html(get_the_author_meta('description')); ?>
                             </p>
                         </div>
                     </div>
                 <?php endif; ?>
 
-            </div><!-- .storyly-container -->
+            </div><!-- .narrato-container -->
         </article>
 
         <!-- Related stories -->
         <?php
-        $storyly_current_id = get_the_ID();
-        $storyly_related_args = [
+        $narrato_current_id = get_the_ID();
+        $narrato_related_args = [
             'post_type'      => 'story',
             'posts_per_page' => 4, // Fetch extra to account for current post
             'orderby'        => 'date',
@@ -120,39 +120,39 @@ while (have_posts()) :
             'no_found_rows'  => true, // Performance optimization
         ];
 
-        if (! empty($storyly_topics) && ! is_wp_error($storyly_topics)) {
+        if (! empty($narrato_topics) && ! is_wp_error($narrato_topics)) {
             // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
-            $storyly_related_args['tax_query'] = [[
-                'taxonomy' => 'storyly_topic',
+            $narrato_related_args['tax_query'] = [[
+                'taxonomy' => 'narrato_topic',
                 'field'    => 'term_id',
-                'terms'    => wp_list_pluck($storyly_topics, 'term_id'),
+                'terms'    => wp_list_pluck($narrato_topics, 'term_id'),
             ]];
         }
 
-        $storyly_related_posts = [];
-        if ($storyly_options['show_related']) {
-            $storyly_related = new WP_Query($storyly_related_args);
-            if ($storyly_related->have_posts()) {
-                foreach ($storyly_related->posts as $storyly_p) {
-                    if ($storyly_p->ID !== $storyly_current_id) {
-                        $storyly_related_posts[] = $storyly_p;
-                        if (count($storyly_related_posts) === 3) break;
+        $narrato_related_posts = [];
+        if ($narrato_options['show_related']) {
+            $narrato_related = new WP_Query($narrato_related_args);
+            if ($narrato_related->have_posts()) {
+                foreach ($narrato_related->posts as $narrato_p) {
+                    if ($narrato_p->ID !== $narrato_current_id) {
+                        $narrato_related_posts[] = $narrato_p;
+                        if (count($narrato_related_posts) === 3) break;
                     }
                 }
             }
         }
 
-        if (!empty($storyly_related_posts)) : 
+        if (!empty($narrato_related_posts)) :
             global $post;
         ?>
-            <div class="storyly-related">
-                <div class="storyly-container">
-                    <h3 class="storyly-related-title">
-                        <?php esc_html_e('More from Storyly', 'storyly'); ?>
+            <div class="narrato-related">
+                <div class="narrato-container">
+                    <h3 class="narrato-related-title">
+                        <?php esc_html_e('More Stories', 'narrato-for-writers'); ?>
                     </h3>
-                    <div class="storyly-card-grid">
-                        <?php foreach ($storyly_related_posts as $post) : setup_postdata($post); ?>
-                            <?php include STORYLY_PATH . 'templates/partials/story-card.php'; ?>
+                    <div class="narrato-card-grid">
+                        <?php foreach ($narrato_related_posts as $post) : setup_postdata($post); ?>
+                            <?php include NARRATO_PATH . 'templates/partials/story-card.php'; ?>
                         <?php endforeach;
                         wp_reset_postdata(); ?>
                     </div>
@@ -160,17 +160,17 @@ while (have_posts()) :
             </div>
         <?php endif; ?>
 
-    </div><!-- .storyly-wrapper -->
+    </div><!-- .narrato-wrapper -->
 
 <?php
 endwhile;
 
 
 wp_enqueue_script(
-    'storyly-reading-progress',
-    STORYLY_URL . 'assets/js/reading-progress.js',
+    'narrato-reading-progress',
+    NARRATO_URL . 'assets/js/reading-progress.js',
     [],
-    STORYLY_VERSION,
+    NARRATO_VERSION,
     true
 );
 
