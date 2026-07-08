@@ -41,7 +41,7 @@ final class Topic {
             'rewrite'           => [ 'slug' => 'topic', 'with_front' => false ],
         ];
 
-        register_taxonomy( 'narrato_topic', [ 'story' ], $args );
+        register_taxonomy( 'narrato_topic', [ 'narrato_story' ], $args );
     }
 
     public function load_template( string $template ) : string {

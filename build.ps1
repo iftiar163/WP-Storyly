@@ -1,5 +1,5 @@
 $sourceDir = $PSScriptRoot
-$destZip = Join-Path -Path (Split-Path $sourceDir -Parent) -ChildPath "storyly-release.zip"
+$destZip = Join-Path -Path (Split-Path $sourceDir -Parent) -ChildPath "narrato-for-writers.zip"
 
 if (Test-Path $destZip) {
     Remove-Item $destZip -Force

@@ -6,8 +6,8 @@ defined('ABSPATH') || exit;
 
 final class Settings
 {
-    private const OPTION_GROUP = 'wp_narrato_settings';
-    private const OPTION_NAME = 'wp_narrato_options';
+    private const OPTION_GROUP = 'narrato_settings';
+    private const OPTION_NAME  = 'narrato_options';
     private const PAGE_SLUG = 'narrato-settings';
 
     public function register(): void

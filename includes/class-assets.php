@@ -21,6 +21,16 @@ final class Assets {
             [],
             NARRATO_VERSION
         );
+
+        if ( is_singular( 'narrato_story' ) ) {
+            wp_enqueue_script(
+                'narrato-reading-progress',
+                NARRATO_URL . 'assets/js/reading-progress.js',
+                [],
+                NARRATO_VERSION,
+                true
+            );
+        }
     }
 
     public function enqueue_editor(): void {
@@ -29,7 +39,7 @@ final class Assets {
         }
 
         $screen = get_current_screen();
-        if ( ! $screen || $screen->post_type !== 'story' ) {
+        if ( ! $screen || $screen->post_type !== 'narrato_story' ) {
             return;
         }
 
@@ -42,8 +52,8 @@ final class Assets {
     }
 
     private function is_narrato_page(): bool {
-        return is_singular( 'story' )
-            || is_post_type_archive( 'story' )
+        return is_singular( 'narrato_story' )
+            || is_post_type_archive( 'narrato_story' )
             || is_tax( 'narrato_topic' );
     }
 }

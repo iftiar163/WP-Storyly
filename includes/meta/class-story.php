@@ -6,14 +6,14 @@ defined( 'ABSPATH' ) || exit;
 final class Story {
     public function register() : void {
         add_action('init', [$this, 'register_meta_fields']);
-        add_action('save_post_story', [$this, 'save_reading_time'], 10, 2);
-        add_action('add_meta_boxes_story', [$this, 'register_meta_boxes']);
-        add_action('save_post_story', [$this, 'save_subtitle_meta'], 10, 2);
+        add_action('save_post_narrato_story', [$this, 'save_reading_time'], 10, 2);
+        add_action('add_meta_boxes_narrato_story', [$this, 'register_meta_boxes']);
+        add_action('save_post_narrato_story', [$this, 'save_subtitle_meta'], 10, 2);
     }
 
     public function register_meta_fields(): void {
         // Subtitle
-        register_post_meta( 'story', '_narrato_subtitle', [
+        register_post_meta( 'narrato_story', '_narrato_subtitle', [
             'type'              => 'string',
             'description'       => __( 'Story subtitle', 'narrato-for-writers' ),
             'single'            => true,
@@ -24,7 +24,7 @@ final class Story {
         ] );
 
         // Reading time (minutes) — auto-calculated
-        register_post_meta( 'story', '_narrato_reading_time', [
+        register_post_meta( 'narrato_story', '_narrato_reading_time', [
             'type'              => 'integer',
             'description'       => __( 'Estimated reading time in minutes', 'narrato-for-writers' ),
             'single'            => true,
@@ -40,7 +40,7 @@ final class Story {
             'narrato_subtitle',
             __('Story Subtitle', 'narrato-for-writers'),
             [$this, 'render_subtitle_field'],
-            'story',
+            'narrato_story',
             'normal',
             'high'
         );

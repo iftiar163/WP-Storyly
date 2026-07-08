@@ -53,18 +53,18 @@ final class Story {
         ],
     ];
 
-        register_post_type( 'story', $args );
+        register_post_type( 'narrato_story', $args );
     }
 
     public function load_template( string $template) : string {
-        if(is_singular('story')){
+        if(is_singular('narrato_story')){
             $custom = NARRATO_PATH . 'templates/single-story.php';
             if(file_exists($custom)){
                 return $custom;
             }
         }
 
-        if(is_post_type_archive('story')){
+        if(is_post_type_archive('narrato_story')){
             $custom = NARRATO_PATH . 'templates/archive-story.php';
             if(file_exists($custom)){
                 return $custom;

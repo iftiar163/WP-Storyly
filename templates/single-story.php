@@ -113,7 +113,7 @@ while (have_posts()) :
         <?php
         $narrato_current_id = get_the_ID();
         $narrato_related_args = [
-            'post_type'      => 'story',
+            'post_type'      => 'narrato_story',
             'posts_per_page' => 4, // Fetch extra to account for current post
             'orderby'        => 'date',
             'order'          => 'DESC',
@@ -164,14 +164,5 @@ while (have_posts()) :
 
 <?php
 endwhile;
-
-
-wp_enqueue_script(
-    'narrato-reading-progress',
-    NARRATO_URL . 'assets/js/reading-progress.js',
-    [],
-    NARRATO_VERSION,
-    true
-);
 
 get_footer();
