@@ -19,5 +19,6 @@ final class Plugin
         (new Meta\Story())->register();
         (new Assets())->register();
         (new Admin\Settings())->register();
+        (new Engagement())->register();
     }
 }
