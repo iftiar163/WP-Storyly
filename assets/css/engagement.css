@@ -1,0 +1,315 @@
+/* ============================================================
+   Narrato — Engagement Styles (Claps + Bookmarks)
+   Version: 1.1.0
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Floating Sidebar
+   ------------------------------------------------------------ */
+.narrato-engagement-sidebar {
+  position: fixed;
+  left: max(24px, calc(50vw - 380px));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.narrato-engagement-sidebar.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ------------------------------------------------------------
+   Clap Button
+   ------------------------------------------------------------ */
+.narrato-clap-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.narrato-clap-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  background: var(--narrato-color-bg, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.narrato-clap-btn:hover .narrato-clap-icon {
+  border-color: var(--narrato-color-text, #242424);
+  background: var(--narrato-color-text, #242424);
+}
+
+.narrato-clap-btn:hover .narrato-clap-icon svg {
+  fill: #ffffff;
+}
+
+.narrato-clap-btn.is-clapping .narrato-clap-icon {
+  animation: narrato-clap-pulse 0.3s ease forwards;
+}
+
+.narrato-clap-btn.is-maxed .narrato-clap-icon {
+  border-color: var(--narrato-color-text, #242424);
+  background: var(--narrato-color-text, #242424);
+}
+
+.narrato-clap-btn.is-maxed .narrato-clap-icon svg {
+  fill: #ffffff;
+}
+
+.narrato-clap-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--narrato-color-subtle, #6b6b6b);
+  transition: fill 0.15s ease;
+}
+
+.narrato-clap-count {
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  font-family: var(--narrato-font-sans, sans-serif);
+  font-weight: 500;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Floating +1 animation */
+.narrato-clap-burst {
+  position: absolute;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--narrato-color-text, #242424);
+  font-family: var(--narrato-font-sans, sans-serif);
+  pointer-events: none;
+  animation: narrato-burst 0.8s ease forwards;
+}
+
+@keyframes narrato-burst {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-32px) scale(1.3); }
+}
+
+@keyframes narrato-clap-pulse {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* ------------------------------------------------------------
+   Bookmark Button
+   ------------------------------------------------------------ */
+.narrato-bookmark-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.narrato-bookmark-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  background: var(--narrato-color-bg, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.narrato-bookmark-btn:hover .narrato-bookmark-icon {
+  border-color: var(--narrato-color-text, #242424);
+}
+
+.narrato-bookmark-btn.is-bookmarked .narrato-bookmark-icon {
+  border-color: var(--narrato-color-text, #242424);
+  background: var(--narrato-color-text, #242424);
+}
+
+.narrato-bookmark-btn.is-bookmarked .narrato-bookmark-icon svg {
+  fill: #ffffff;
+}
+
+.narrato-bookmark-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--narrato-color-subtle, #6b6b6b);
+  stroke-width: 2;
+  transition: fill 0.15s ease, stroke 0.15s ease;
+}
+
+.narrato-bookmark-btn.is-bookmarked .narrato-bookmark-icon svg {
+  stroke: #ffffff;
+}
+
+.narrato-bookmark-label {
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  font-family: var(--narrato-font-sans, sans-serif);
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------
+   Toast notification
+   ------------------------------------------------------------ */
+.narrato-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--narrato-color-text, #242424);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-family: var(--narrato-font-sans, sans-serif);
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.narrato-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ------------------------------------------------------------
+   Clap count on story cards
+   ------------------------------------------------------------ */
+.narrato-card-claps {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+}
+
+.narrato-card-claps svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--narrato-color-subtle, #6b6b6b);
+}
+
+/* ------------------------------------------------------------
+   My Bookmarks page
+   ------------------------------------------------------------ */
+.narrato-bookmarks-header {
+  padding: 48px 0 32px;
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+  margin-bottom: 0;
+}
+
+.narrato-bookmarks-title {
+  font-family: var(--narrato-font-serif, Georgia, serif);
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-bookmarks-count {
+  font-size: 14px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  margin: 0;
+}
+
+.narrato-bookmarks-empty {
+  padding: 64px 0;
+  text-align: center;
+}
+
+.narrato-bookmarks-empty p {
+  font-size: 16px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  margin: 0 0 16px;
+}
+
+.narrato-bookmarks-empty a {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--narrato-color-text, #242424);
+  color: #ffffff;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.narrato-bookmarks-empty a:hover {
+  opacity: 0.85;
+}
+
+.narrato-login-notice {
+  padding: 64px 0;
+  text-align: center;
+}
+
+.narrato-login-notice p {
+  font-size: 16px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  margin: 0 0 16px;
+}
+
+.narrato-login-notice a {
+  display: inline-block;
+  padding: 10px 24px;
+  background: var(--narrato-color-text, #242424);
+  color: #ffffff;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   Responsive — hide sidebar on narrow screens, show inline
+   ------------------------------------------------------------ */
+@media ( max-width: 1080px ) {
+  .narrato-engagement-sidebar {
+    display: none;
+  }
+
+  .narrato-engagement-inline {
+    display: flex !important;
+  }
+}
+
+.narrato-engagement-inline {
+  display: none;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 0;
+  border-top: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+  margin: 32px 0;
+}

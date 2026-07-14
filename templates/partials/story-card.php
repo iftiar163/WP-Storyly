@@ -53,6 +53,17 @@ $narrato_author_id    = get_the_author_meta( 'ID' );
                         esc_html__( '%d min read', 'narrato-for-writers' ),
                         (int) $narrato_reading_time
                     ); ?></span>
+                    <?php
+                    $narrato_clap_total = (int) get_post_meta( get_the_ID(), '_narrato_clap_total', true );
+                    if ( $narrato_clap_total > 0 ) : ?>
+                        <span class="narrato-dot">·</span>
+                        <span class="narrato-card-claps">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.5 8.5c.8-.8 2-.8 2.8 0l.7.7.7-.7c.8-.8 2-.8 2.8 0 .8.8.8 2 0 2.8L12 14.3l-3.5-3.5c-.8-.8-.8-2 0-2.8z"/>
+                            </svg>
+                            <?php echo number_format_i18n( $narrato_clap_total ); ?>
+                        </span>
+                    <?php endif; ?>
                 </div>
             </div>
 

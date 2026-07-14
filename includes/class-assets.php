@@ -31,6 +31,51 @@ final class Assets {
                 true
             );
         }
+
+        // Engagement features
+        if( is_user_logged_in() ){
+            wp_enqueue_style(
+                'narrato-engagement',
+                NARRATO_URL . 'assets/css/engagement.css',
+                [],
+                NARRATO_VERSION
+            );
+
+            wp_enqueue_script(
+                'narrato-engagement',
+                NARRATO_URL . 'assets/js/engagement.js',
+                [],
+                NARRATO_VERSION,
+                true
+            );
+
+            wp_localize_script( 'narrato-engagement', 'narratoEngagement', [
+                'restUrl'   => esc_url_raw( rest_url( 'narrato/v1' ) ),
+                'nonce'     => wp_create_nonce( 'wp_rest' ),
+                'postId'    => get_the_ID(),
+                'isLoggedIn' => true,
+                'maxClaps'  => 50,
+                'i18n'      => [
+                    'clap'           => __( 'Clap', 'narrato-for-writers' ),
+                    'clapped'        => __( 'Clapped!', 'narrato-for-writers' ),
+                    'bookmark'       => __( 'Save story', 'narrato-for-writers' ),
+                    'bookmarked'     => __( 'Saved!', 'narrato-for-writers' ),
+                    'loginRequired'  => __( 'Please log in to clap or bookmark stories.', 'narrato-for-writers' ),
+                    'maxReached'     => __( 'You\'ve used all 50 claps!', 'narrato-for-writers' ),
+                ],
+            ] );
+
+        }
+
+        // Bookmark Page
+        if( get_query_var('narrato_bookmarks') ) {
+            wp_enqueue_style(
+                'narato-frontend',
+                NARRATO_URL . 'assets/css/frontend.css',
+                [],
+                NARRATO_VERSION
+            );
+        }
     }
 
     public function enqueue_editor(): void {

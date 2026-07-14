@@ -75,7 +75,16 @@ Please use the support forum on wordpress.org for bug reports and feature reques
 * Reading progress bar
 * Admin settings page
 
+= 1.1.0 =
+* New: Claps — logged-in users can clap up to 50 times per story
+* New: Bookmarks — save stories to your personal reading list
+* New: Floating engagement sidebar on single story pages
+* New: My Bookmarks page at /my-bookmarks/
+* New: Clap count displayed on story cards and archive
+* New: REST API endpoints for claps and bookmarks (narrato/v1)
+* Improved: Version upgrade routine with DB migration support
+
 == Upgrade Notice ==
 
-= 1.0.0 =
-Initial release.
+= 1.1.0 =
+Stable tag: 1.1.0

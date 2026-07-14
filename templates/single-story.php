@@ -78,6 +78,30 @@ while (have_posts()) :
                     <?php the_content(); ?>
                 </div>
 
+                <?php if ( is_user_logged_in() ) : ?>
+                <!-- Inline engagement (shown on mobile / narrow screens) -->
+                <div class="narrato-engagement-inline">
+                    <button class="narrato-clap-btn" aria-label="<?php esc_attr_e( 'Clap for this story', 'narrato-for-writers' ); ?>">
+                        <span class="narrato-clap-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                                <path d="M8.5 8.5c.8-.8 2-.8 2.8 0l.7.7.7-.7c.8-.8 2-.8 2.8 0 .8.8.8 2 0 2.8L12 14.3l-3.5-3.5c-.8-.8-.8-2 0-2.8z"/>
+                            </svg>
+                        </span>
+                        <span class="narrato-clap-count">0</span>
+                    </button>
+
+                    <button class="narrato-bookmark-btn" aria-label="<?php esc_attr_e( 'Save this story', 'narrato-for-writers' ); ?>">
+                        <span class="narrato-bookmark-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M5 3h14a1 1 0 0 1 1 1v17l-8-4-8 4V4a1 1 0 0 1 1-1z"/>
+                            </svg>
+                        </span>
+                        <span class="narrato-bookmark-label"><?php esc_html_e( 'Save story', 'narrato-for-writers' ); ?></span>
+                    </button>
+                </div>
+                <?php endif; ?>
+
                 <!-- Footer: topics -->
                 <?php if (! empty($narrato_topics) && ! is_wp_error($narrato_topics)) : ?>
                     <div class="narrato-footer-topics">
@@ -158,6 +182,30 @@ while (have_posts()) :
                     </div>
                 </div>
             </div>
+        <?php endif; ?>
+
+        <?php if ( is_user_logged_in() ) : ?>
+        <!-- Floating sidebar engagement -->
+        <div class="narrato-engagement-sidebar" aria-label="<?php esc_attr_e( 'Story actions', 'narrato-for-writers' ); ?>">
+            <button class="narrato-clap-btn" aria-label="<?php esc_attr_e( 'Clap for this story', 'narrato-for-writers' ); ?>">
+                <span class="narrato-clap-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8.5 8.5c.8-.8 2-.8 2.8 0l.7.7.7-.7c.8-.8 2-.8 2.8 0 .8.8.8 2 0 2.8L12 14.3l-3.5-3.5c-.8-.8-.8-2 0-2.8z"/>
+                        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/>
+                    </svg>
+                </span>
+                <span class="narrato-clap-count">0</span>
+            </button>
+
+            <button class="narrato-bookmark-btn" aria-label="<?php esc_attr_e( 'Save this story', 'narrato-for-writers' ); ?>">
+                <span class="narrato-bookmark-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M5 3h14a1 1 0 0 1 1 1v17l-8-4-8 4V4a1 1 0 0 1 1-1z"/>
+                    </svg>
+                </span>
+                <span class="narrato-bookmark-label"><?php esc_html_e( 'Save story', 'narrato-for-writers' ); ?></span>
+            </button>
+        </div>
         <?php endif; ?>
 
     </div><!-- .narrato-wrapper -->
