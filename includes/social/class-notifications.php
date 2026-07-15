@@ -11,7 +11,9 @@ final class Notifications
 
     public function register(): void
     {
-        add_action('rest_api_init', [$this, register_routes]);
+        add_action('rest_api_init', [$this, 'register_routes']);
+        add_action('narrato_user_followed_author', [$this, 'on_new_follower'], 10, 2);
+        add_action('transition_post_status', [$this, 'on_story_published']);
     }
 
     public function register_routes(): void
@@ -19,14 +21,14 @@ final class Notifications
         // GET /narrato/v1/notifications
         register_rest_route(self::REST_NS, '/notifications', [
             'methods'             => 'GET',
-            'callback'            => [$this, get_notifications],
+            'callback'            => [$this, 'get_notifications'],
             'permission_callback' => fn() => is_user_logged_in(),
         ]);
 
         // POST /narrato/v1/notifications/read-all
         register_rest_route(self::REST_NS, '/notifications/read-all', [
             'methods'             => 'POST',
-            'callback'            => [$this, mark_all_read],
+            'callback'            => [$this, 'mark_all_read'],
             'permission_callback' => fn() => is_user_logged_in(),
         ]);
     }
@@ -102,5 +104,92 @@ final class Notifications
             'created_at' => $row['created_at'],
             'time_ago'   => human_time_diff(strtotime($row['created_at']), current_time('timestamp')),
         ];
+    }
+
+    public function mark_all_read(\WP_REST_Request $request): \WP_REST_Response
+    {
+        global $wpdb;
+        $user_id = get_current_user_id();
+        $table = $wpdb->prefix . 'narrato_notifications';
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $wpdb->update(
+            $table,
+            ['is_read' => 1],
+            ['user_id' => $user_id, 'is_read' => 0],
+            ['%d'],
+            ['%d', '%d']
+        );
+
+        return new \WP_REST_Response([
+            'success' => true,
+        ], 200);
+    }
+
+    // Trigger
+    public function on_new_follower(int $follower_id, int $author_id): void
+    {
+        $this->insert_notification($author_id, 'new_follower', $follower_id, 0);
+    }
+
+    public function on_story_published(string $new_status, string $old_status, \WP_Post $post): void
+    {
+        if ($post->post_type !== 'narrato_story') return;
+        if ($new_status !== 'publish' || $old_status === 'publish') return;
+
+        $author_id = (int) $post->post_author;
+        $follower_ids = $this->get_author_followers($author_id);
+
+        foreach ($follower_ids as $follower_id) {
+            $this->insert_notification($follower_id, 'new_story', $author_id, $post->ID);
+        }
+    }
+
+    private function get_author_followers(int $author_id): array
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'narrato_follows';
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $ids = $wpdb->get_col($wpdb->prepare(
+            "SELECT user_id FROM {$table} WHERE follow_type = 'author' AND object_id = %d",
+            $author_id
+        ));
+
+        return array_map('intval', $ids);
+    }
+
+    private function insert_notification(int $user_id, string $type, int $actor_id, int $object_id): void
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'narrato_notifications';
+
+        $wpdb->insert(
+            $table,
+            [
+                'user_id' => $user_id,
+                'type'    => $type,
+                'actor_id' => $actor_id,
+                'object_id' => $object_id,
+            ],
+            [
+                '%d',
+                '%s',
+                '%d',
+                '%d',
+            ]
+        );
+    }
+
+    public static function get_unread_count(int $user_id): int
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'narrato_notifications';
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        return (int) $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM {$table} WHERE user_id = %d AND is_read = 0",
+            $user_id
+        ));
     }
 }
