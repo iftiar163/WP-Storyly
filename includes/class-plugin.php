@@ -20,5 +20,6 @@ final class Plugin
         (new Assets())->register();
         (new Admin\Settings())->register();
         (new Engagement())->register();
+        (new Social())->register();
     }
 }
