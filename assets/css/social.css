@@ -1,0 +1,236 @@
+/* ============================================================
+   Narrato — Social Styles (Follow + Profile + Notifications)
+   Version: 1.2.0
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Follow Button
+   ------------------------------------------------------------ */
+.narrato-follow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--narrato-color-text, #242424);
+  background: var(--narrato-color-text, #242424);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--narrato-font-sans, sans-serif);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.narrato-follow-btn:hover {
+  opacity: 0.85;
+  color: #ffffff;
+}
+
+.narrato-follow-btn.is-following {
+  background: transparent;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-follow-btn.is-following:hover {
+  background: #fdecec;
+  border-color: #d33;
+  color: #d33;
+}
+
+.narrato-follow-btn.is-following:hover::after {
+  content: attr(data-hover-text);
+}
+
+.narrato-follow-btn-sm {
+  padding: 4px 14px;
+  font-size: 12px;
+}
+
+/* ------------------------------------------------------------
+   Author bar follow button (inline with byline)
+   ------------------------------------------------------------ */
+.narrato-author-bar {
+  position: relative;
+}
+
+.narrato-author-bar .narrato-follow-btn {
+  margin-left: auto;
+}
+
+/* ------------------------------------------------------------
+   Topic follow button
+   ------------------------------------------------------------ */
+.narrato-topic-follow-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* ------------------------------------------------------------
+   Profile Page
+   ------------------------------------------------------------ */
+.narrato-profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+}
+
+.narrato-profile-avatar {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.narrato-profile-name {
+  font-family: var(--narrato-font-serif, Georgia, serif);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-profile-bio {
+  font-size: 16px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  max-width: 480px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.narrato-profile-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  margin-bottom: 20px;
+}
+
+.narrato-profile-stats strong {
+  color: var(--narrato-color-text, #242424);
+}
+
+/* ------------------------------------------------------------
+   Notification Bell
+   ------------------------------------------------------------ */
+.narrato-notif-wrap {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 200;
+}
+
+.narrato-notif-bell {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  background: var(--narrato-color-bg, #ffffff);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.narrato-notif-bell svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--narrato-color-text, #242424);
+  stroke-width: 2;
+}
+
+.narrato-notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 100px;
+  background: #d33;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.narrato-notif-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: var(--narrato-color-bg, #ffffff);
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  display: none;
+  z-index: 300;
+}
+
+.narrato-notif-dropdown.is-open {
+  display: block;
+}
+
+.narrato-notif-item {
+  display: block;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+  text-decoration: none;
+  color: var(--narrato-color-text, #242424);
+  font-size: 14px;
+  line-height: 1.5;
+  transition: background 0.1s ease;
+}
+
+.narrato-notif-item:hover {
+  background: var(--narrato-color-bg-alt, #f9f9f9);
+}
+
+.narrato-notif-item:last-child {
+  border-bottom: none;
+}
+
+.narrato-notif-item.is-unread {
+  background: #f5f9ff;
+}
+
+.narrato-notif-time {
+  display: block;
+  font-size: 12px;
+  color: var(--narrato-color-lighter, #b3b3b1);
+  margin-top: 4px;
+}
+
+.narrato-notif-empty {
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+}
+
+/* ------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------ */
+@media ( max-width: 640px ) {
+  .narrato-notif-dropdown {
+    width: calc(100vw - 32px);
+    right: -16px;
+  }
+
+  .narrato-profile-name {
+    font-size: 26px;
+  }
+}

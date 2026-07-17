@@ -84,6 +84,15 @@ Please use the support forum on wordpress.org for bug reports and feature reques
 * New: REST API endpoints for claps and bookmarks (narrato/v1)
 * Improved: Version upgrade routine with DB migration support
 
+= 1.2.0 =
+* New: Follow authors, topics, and individual stories
+* New: Author profile pages at /profile/{username}/
+* New: Following feed at /following/
+* New: On-site notifications for new followers and new stories from followed authors
+* New: Notification bell with unread badge (site-wide for logged-in users)
+* New: Follow buttons on story pages, profile pages, and topic tags
+* New: REST API endpoints for follows and notifications (narrato/v1)
+
 == Upgrade Notice ==
 
 = 1.1.0 =
