@@ -13,7 +13,7 @@ final class Notifications
     {
         add_action('rest_api_init', [$this, 'register_routes']);
         add_action('narrato_user_followed_author', [$this, 'on_new_follower'], 10, 2);
-        add_action('transition_post_status', [$this, 'on_story_published']);
+        add_action('transition_post_status', [$this, 'on_story_published'], 10, 3);
     }
 
     public function register_routes(): void
@@ -102,7 +102,7 @@ final class Notifications
             'link'       => $link,
             'is_read'    => (bool) $row['is_read'],
             'created_at' => $row['created_at'],
-            'time_ago'   => human_time_diff(strtotime($row['created_at']), current_time('timestamp')),
+            'time_ago' => human_time_diff(strtotime($row['created_at']), current_time('timestamp', true)),
         ];
     }
 
@@ -162,22 +162,21 @@ final class Notifications
     private function insert_notification(int $user_id, string $type, int $actor_id, int $object_id): void
     {
         global $wpdb;
+        if (! $user_id) return;
+
         $table = $wpdb->prefix . 'narrato_notifications';
 
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
         $wpdb->insert(
             $table,
             [
-                'user_id' => $user_id,
-                'type'    => $type,
-                'actor_id' => $actor_id,
-                'object_id' => $object_id,
+                'user_id'    => $user_id,
+                'type'       => $type,
+                'actor_id'   => $actor_id,
+                'object_id'  => $object_id,
+                'created_at' => current_time('mysql', true), // ← GMT, explicit
             ],
-            [
-                '%d',
-                '%s',
-                '%d',
-                '%d',
-            ]
+            ['%d', '%s', '%d', '%d', '%s']
         );
     }
 
