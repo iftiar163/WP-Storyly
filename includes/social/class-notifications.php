@@ -129,7 +129,30 @@ final class Notifications
     // Trigger
     public function on_new_follower(int $follower_id, int $author_id): void
     {
+        if ($this->recent_duplicate_exists($author_id, 'new_follower', $follower_id)) {
+            return;
+        }
         $this->insert_notification($author_id, 'new_follower', $follower_id, 0);
+    }
+
+    private function recent_duplicate_exists(int $user_id, string $type, int $actor_id): bool
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'narrato_notifications';
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+        $exists = $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM {$table}
+         WHERE user_id = %d AND type = %s AND actor_id = %d
+         AND created_at > DATE_SUB(%s, INTERVAL 24 HOUR)
+         LIMIT 1",
+            $user_id,
+            $type,
+            $actor_id,
+            current_time('mysql', true)
+        ));
+
+        return (bool) $exists;
     }
 
     public function on_story_published(string $new_status, string $old_status, \WP_Post $post): void

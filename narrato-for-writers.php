@@ -68,7 +68,7 @@ register_deactivation_hook(
 
 // Run DB upgrades on version change
 add_action('plugins_loaded', function (): void {
-    if (get_option('narrato_db_version') !== '1.1.0') {
+    if (get_option('narrato_db_version') !== '1.2.0') {
         Narrato\Activator::create_tables();
         flush_rewrite_rules();
     }

@@ -76,6 +76,12 @@
           badge.style.display = 'none';
         }
 
+        if ( ! data.notifications || data.notifications.length === 0 ) {
+          bell.classList.add( 'is-empty' );
+        } else {
+          bell.classList.remove( 'is-empty' );
+        }
+
         dropdown.innerHTML = '';
 
         if ( ! data.notifications || data.notifications.length === 0 ) {

@@ -90,8 +90,10 @@ Please use the support forum on wordpress.org for bug reports and feature reques
 * New: Following feed at /following/
 * New: On-site notifications for new followers and new stories from followed authors
 * New: Notification bell with unread badge (site-wide for logged-in users)
-* New: Follow buttons on story pages, profile pages, and topic tags
+* New: Follow buttons on story pages, profile pages, topic tags, and story cards
 * New: REST API endpoints for follows and notifications (narrato/v1)
+* Improved: Notification bell dims when there are no notifications yet
+* Fixed: Duplicate follower notifications no longer created within a 24-hour window
 
 == Upgrade Notice ==
 

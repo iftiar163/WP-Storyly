@@ -48,6 +48,12 @@
   font-size: 12px;
 }
 
+.narrato-follow-btn-xs {
+  padding: 3px 12px;
+  font-size: 11px;
+  margin-left: auto;
+}
+
 /* ------------------------------------------------------------
    Author bar follow button (inline with byline)
    ------------------------------------------------------------ */
@@ -137,6 +143,10 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.narrato-notif-bell.is-empty svg {
+  opacity: 0.35;
 }
 
 .narrato-notif-bell svg {
