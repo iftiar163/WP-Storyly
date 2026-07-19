@@ -4,7 +4,7 @@ Tags:              blog, writing, stories, medium, publishing
 Requires at least: 6.4
 Tested up to:      7.0
 Requires PHP:      8.1
-Stable tag:        1.0.0
+Stable tag:        1.2.0
 License:           GPLv2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,12 @@ Please use the support forum on wordpress.org for bug reports and feature reques
 * Fixed: Duplicate follower notifications no longer created within a 24-hour window
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Adds follow system for authors, topics and stories, author profile pages, following feed, and on-site notifications. Recommended update.
+
+= 1.1.0 =
+Adds claps and bookmarks. Recommended update.
 
 = 1.1.0 =
 Stable tag: 1.1.0
