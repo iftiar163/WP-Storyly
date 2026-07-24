@@ -4,7 +4,7 @@
  * Plugin Name:       Narrato for Writers by Iftiar
  * Plugin URI:        https://wordpress.org/plugins/narrato-for-writers/
  * Description:       Transform your WordPress site into a clean, Medium-style writing and reading platform.
- * Version:           1.2.0
+ * Version:           1.2.1
  * Requires at least: 6.4
  * Requires PHP:      8.1
  * Author:            Iftiar Hossain

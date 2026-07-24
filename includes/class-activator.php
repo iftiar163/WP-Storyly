@@ -70,7 +70,27 @@ final class Activator
 
         dbDelta($sql_notif);
 
-        update_option('narrato_db_version', '1.2.0');
+        // Submissions table (v1.3) — tracks story → publication → status
+        $submissions_table = $wpdb->prefix . 'narrato_submissions';
+        $sql_submissions = "CREATE TABLE IF NOT EXISTS {$submissions_table} (
+            id               BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            story_id         BIGINT(20) UNSIGNED NOT NULL,
+            publication_id   BIGINT(20) UNSIGNED NOT NULL,
+            submitted_by     BIGINT(20) UNSIGNED NOT NULL,
+            status           ENUM('pending','approved','rejected','changes_requested') NOT NULL DEFAULT 'pending',
+            editor_note      TEXT NULL,
+            reviewed_by      BIGINT(20) UNSIGNED NULL,
+            created_at       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at       DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY  (id),
+            UNIQUE KEY   story_publication (story_id, publication_id),
+            KEY          publication_status (publication_id, status),
+            KEY          submitted_by (submitted_by)
+        ) {$charset_collate};";
+
+        dbDelta( $sql_submissions );
+
+        update_option('narrato_db_version', '1.3.0');
     }
 
     private static function create_default_topics(): void
