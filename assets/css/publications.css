@@ -1,0 +1,482 @@
+/* ============================================================
+   Narrato — Publications Styles
+   Version: 1.3.0
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Submit CTA (on single story)
+   ------------------------------------------------------------ */
+.narrato-submit-cta {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--narrato-color-border, #e6e6e6);
+}
+
+/* ------------------------------------------------------------
+   Publication Header (single-publication.php)
+   ------------------------------------------------------------ */
+.narrato-pub-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+}
+
+.narrato-pub-logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.narrato-pub-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.narrato-pub-title {
+  font-family: var(--narrato-font-serif, Georgia, serif);
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-pub-description {
+  font-size: 16px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  max-width: 520px;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.narrato-pub-editors {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.narrato-pub-editors-label {
+  font-size: 13px;
+  color: var(--narrato-color-lighter, #b3b3b1);
+  margin-right: 4px;
+}
+
+.narrato-pub-editor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  background: var(--narrato-color-topic-bg, #f2f2f2);
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--narrato-color-text, #242424);
+  text-decoration: none;
+}
+
+.narrato-pub-editor-chip img {
+  border-radius: 50%;
+  display: block;
+}
+
+.narrato-pub-open-badge {
+  font-size: 13px;
+  color: var(--narrato-color-accent, #1a8917);
+  font-weight: 500;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   Publication Grid + Card (archive-publication.php)
+   ------------------------------------------------------------ */
+.narrato-pub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin: 32px 0;
+}
+
+.narrato-pub-card {
+  display: flex;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.narrato-pub-card:hover {
+  border-color: var(--narrato-color-text, #242424);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.narrato-pub-card-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.narrato-pub-card-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.narrato-pub-card-body {
+  min-width: 0;
+}
+
+.narrato-pub-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-pub-card-desc {
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  line-height: 1.5;
+  margin: 0 0 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.narrato-pub-card-count {
+  font-size: 12px;
+  color: var(--narrato-color-lighter, #b3b3b1);
+}
+
+/* ------------------------------------------------------------
+   Dashboard Tabs (publication-dashboard.php)
+   ------------------------------------------------------------ */
+.narrato-pub-dashboard-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+  margin-bottom: 32px;
+}
+
+.narrato-tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 12px 4px;
+  margin-right: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  cursor: pointer;
+  font-family: var(--narrato-font-sans, sans-serif);
+}
+
+.narrato-tab-btn.is-active {
+  color: var(--narrato-color-text, #242424);
+  border-bottom-color: var(--narrato-color-text, #242424);
+}
+
+.narrato-tab-panel {
+  display: none;
+}
+
+.narrato-tab-panel.is-active {
+  display: block;
+}
+
+/* ------------------------------------------------------------
+   Manage publications cards
+   ------------------------------------------------------------ */
+.narrato-pub-manage-card {
+  padding: 20px;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 8px;
+}
+
+.narrato-pub-manage-card h3 {
+  margin: 0 0 12px;
+  font-size: 17px;
+}
+
+.narrato-pub-manage-card h3 a {
+  color: var(--narrato-color-text, #242424);
+  text-decoration: none;
+}
+
+.narrato-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.narrato-pub-review-link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--narrato-color-text, #242424);
+  text-decoration: none;
+}
+
+.narrato-pub-review-link:hover {
+  text-decoration: underline;
+}
+
+/* ------------------------------------------------------------
+   Submit form
+   ------------------------------------------------------------ */
+.narrato-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 420px;
+}
+
+.narrato-submit-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-submit-form select {
+  padding: 10px 12px;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--narrato-font-sans, sans-serif);
+  background: #fff;
+}
+
+.narrato-submit-form button {
+  align-self: flex-start;
+  border: none;
+}
+
+.narrato-submit-result {
+  font-size: 13px;
+  margin: 0;
+}
+
+.narrato-submit-result.is-success {
+  color: var(--narrato-color-accent, #1a8917);
+}
+
+.narrato-submit-result.is-error {
+  color: #d33;
+}
+
+/* ------------------------------------------------------------
+   My Submissions list + Review queue (shared row style)
+   ------------------------------------------------------------ */
+.narrato-submission-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+  flex-wrap: wrap;
+}
+
+.narrato-submission-row:last-child {
+  border-bottom: none;
+}
+
+.narrato-submission-info {
+  min-width: 0;
+}
+
+.narrato-submission-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.narrato-submission-title a {
+  color: var(--narrato-color-text, #242424);
+  text-decoration: none;
+}
+
+.narrato-submission-meta {
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+}
+
+.narrato-submission-note {
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  margin-top: 6px;
+  font-style: italic;
+}
+
+.narrato-submission-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.narrato-submission-status.pending {
+  background: #fff4e0;
+  color: #a86400;
+}
+
+.narrato-submission-status.approved {
+  background: #e6f6e6;
+  color: #1a8917;
+}
+
+.narrato-submission-status.rejected {
+  background: #fdecec;
+  color: #d33;
+}
+
+.narrato-submission-status.changes_requested {
+  background: #eaf1fd;
+  color: #2464c9;
+}
+
+.narrato-submission-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.narrato-review-btn {
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  background: #fff;
+  cursor: pointer;
+  font-family: var(--narrato-font-sans, sans-serif);
+}
+
+.narrato-review-btn.approve {
+  border-color: var(--narrato-color-accent, #1a8917);
+  color: var(--narrato-color-accent, #1a8917);
+}
+
+.narrato-review-btn.approve:hover {
+  background: var(--narrato-color-accent, #1a8917);
+  color: #fff;
+}
+
+.narrato-review-btn.reject {
+  border-color: #d33;
+  color: #d33;
+}
+
+.narrato-review-btn.reject:hover {
+  background: #d33;
+  color: #fff;
+}
+
+.narrato-review-btn.request_changes {
+  border-color: #2464c9;
+  color: #2464c9;
+}
+
+.narrato-review-btn.request_changes:hover {
+  background: #2464c9;
+  color: #fff;
+}
+
+.narrato-create-pub-notice {
+  font-size: 14px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  padding: 24px;
+  background: var(--narrato-color-bg-alt, #f9f9f9);
+  border-radius: 8px;
+}
+
+.narrato-create-pub-notice a {
+  color: var(--narrato-color-text, #242424);
+  font-weight: 600;
+}
+
+.narrato-loading {
+  color: var(--narrato-color-subtle, #6b6b6b);
+  font-size: 14px;
+  padding: 24px 0;
+}
+
+/* ------------------------------------------------------------
+   Review note modal (simple inline prompt style)
+   ------------------------------------------------------------ */
+.narrato-note-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.narrato-note-modal {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 420px;
+}
+
+.narrato-note-modal h4 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.narrato-note-modal textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 4px;
+  font-family: var(--narrato-font-sans, sans-serif);
+  font-size: 14px;
+  resize: vertical;
+  margin-bottom: 16px;
+}
+
+.narrato-note-modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------ */
+@media ( max-width: 640px ) {
+  .narrato-submission-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .narrato-pub-grid {
+    grid-template-columns: 1fr;
+  }
+}

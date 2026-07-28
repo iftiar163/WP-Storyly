@@ -127,6 +127,48 @@ final class Assets
                 ],
             ]);
         }
+
+        // Publications — dashboard, reviews, single/archive publication pages
+        if (
+            is_singular('narrato_publication')
+            || is_post_type_archive('narrato_publication')
+            || get_query_var('narrato_my_publications')
+            || get_query_var('narrato_publication_reviews')
+        ) {
+            wp_enqueue_style(
+                'narrato-publications',
+                NARRATO_URL . 'assets/css/publications.css',
+                ['narrato-frontend'],
+                NARRATO_VERSION
+            );
+        }
+
+        if (is_user_logged_in() && (get_query_var('narrato_my_publications') || get_query_var('narrato_publication_reviews'))) {
+            wp_enqueue_script(
+                'narrato-publications',
+                NARRATO_URL . 'assets/js/publications.js',
+                [],
+                NARRATO_VERSION,
+                true
+            );
+
+            wp_localize_script('narrato-publications', 'narratoPublications', [
+                'restUrl' => esc_url_raw(rest_url('narrato/v1')),
+                'nonce'   => wp_create_nonce('wp_rest'),
+                'i18n'    => [
+                    'submitting'    => __('Submitting…', 'narrato-for-writers'),
+                    'submitted'     => __('Submitted for review!', 'narrato-for-writers'),
+                    'error'         => __('Something went wrong.', 'narrato-for-writers'),
+                    'approve'       => __('Approve', 'narrato-for-writers'),
+                    'reject'        => __('Reject', 'narrato-for-writers'),
+                    'requestChanges' => __('Request Changes', 'narrato-for-writers'),
+                    'addNote'       => __('Add a note (optional)', 'narrato-for-writers'),
+                    'cancel'        => __('Cancel', 'narrato-for-writers'),
+                    'confirm'       => __('Confirm', 'narrato-for-writers'),
+                    'noSubmissions' => __('No submissions here yet.', 'narrato-for-writers'),
+                ],
+            ]);
+        }
     }
 
     public function enqueue_editor(): void
@@ -155,6 +197,8 @@ final class Assets
             || is_tax('narrato_topic')
             || (bool) get_query_var('narrato_bookmarks')
             || (bool) get_query_var('narrato_profile')
-            || (bool) get_query_var('narrato_following');
+            || (bool) get_query_var('narrato_following')
+            || (bool) get_query_var('narrato_my_publications')
+            || (bool) get_query_var('narrato_publication_reviews');
     }
 }

@@ -173,6 +173,15 @@ while (have_posts()) :
                     </div>
                 <?php endif; ?>
 
+                <!-- Submit to Publication (only visible to the story's own author) -->
+                <?php if (is_user_logged_in() && get_current_user_id() === $narrato_author_id) : ?>
+                    <div class="narrato-submit-cta">
+                        <a href="<?php echo esc_url(home_url('/my-publications/')); ?>" class="narrato-follow-btn narrato-follow-btn-sm">
+                            <?php esc_html_e('Submit to a Publication', 'narrato-for-writers'); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
+
             </div><!-- .narrato-container -->
         </article>
 

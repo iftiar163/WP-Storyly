@@ -95,7 +95,21 @@ Please use the support forum on wordpress.org for bug reports and feature reques
 * Improved: Notification bell dims when there are no notifications yet
 * Fixed: Duplicate follower notifications no longer created within a 24-hour window
 
+= 1.3.0 =
+* New: Publications — create multi-editor publications with logo, cover, and description
+* New: Writers can submit their own stories to publications for review
+* New: Editors can Approve, Reject, or Request Changes on submissions, with an optional note
+* New: Email + on-site notifications for new submissions and review decisions
+* New: Author profile-style publication pages at /publication/{slug}/
+* New: /my-publications/ dashboard — manage publications, submit stories, track your submission status
+* New: /publication-reviews/ — editor review queue
+* New: "Open for submissions" toggle per publication
+* New: REST API endpoints for publications, editors, and submissions (narrato/v1)
+
 == Upgrade Notice ==
+
+= 1.3.0 =
+Adds Publications — multi-author collections with a submission and review workflow. Recommended update.
 
 = 1.2.0 =
 Adds follow system for authors, topics and stories, author profile pages, following feed, and on-site notifications. Recommended update.

@@ -12,5 +12,6 @@ final class Publications
         (new Publications\PublicationCPT())->register();
         (new Publications\Editors())->register();
         (new Publications\Submissions())->register();
+        (new Publications\Pages())->register();
     }
 }

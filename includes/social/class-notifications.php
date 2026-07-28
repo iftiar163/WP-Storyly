@@ -91,6 +91,39 @@ final class Notifications
                 $link = $post ? get_permalink($post) : '#';
                 break;
 
+            case 'new_submission':
+                $actor = get_userdata((int) $row['actor_id']);
+                $post  = get_post((int) $row['object_id']);
+                $name  = $actor ? $actor->display_name : __('A writer', 'narrato-for-writers');
+                $title = $post ? $post->post_title : '';
+                $message = sprintf(
+                    /* translators: 1: writer name, 2: story title */
+                    __('%1$s submitted "%2$s" for review', 'narrato-for-writers'),
+                    $name,
+                    $title
+                );
+                $link = home_url('/publication-reviews/');
+                break;
+
+            case 'submission_approved':
+            case 'submission_rejected':
+            case 'submission_changes_requested':
+                $post  = get_post((int) $row['object_id']);
+                $title = $post ? $post->post_title : '';
+                $status_text = [
+                    'submission_approved'          => __('approved', 'narrato-for-writers'),
+                    'submission_rejected'          => __('rejected', 'narrato-for-writers'),
+                    'submission_changes_requested' => __('sent back with changes requested', 'narrato-for-writers'),
+                ][$row['type']];
+                $message = sprintf(
+                    /* translators: 1: story title, 2: status */
+                    __('Your story "%1$s" was %2$s', 'narrato-for-writers'),
+                    $title,
+                    $status_text
+                );
+                $link = home_url('/my-publications/');
+                break;
+
             default:
                 $message = __('New notification', 'narrato-for-writers');
         }
