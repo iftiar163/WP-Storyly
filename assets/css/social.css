@@ -244,3 +244,23 @@
     font-size: 26px;
   }
 }
+
+.narrato-account-quicklink {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+.narrato-account-quicklink img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.narrato-notif-wrap {
+  display: flex;
+  align-items: center;
+}

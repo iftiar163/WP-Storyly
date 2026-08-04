@@ -1,0 +1,215 @@
+/* ============================================================
+   Narrato — Account Dashboard Styles
+   ============================================================ */
+
+.narrato-account-container {
+  max-width: 900px;
+}
+
+.narrato-account-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 0 24px;
+}
+
+.narrato-account-avatar {
+  border-radius: 50%;
+}
+
+.narrato-account-name {
+  font-family: var(--narrato-font-serif, Georgia, serif);
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.narrato-account-public-link {
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  text-decoration: none;
+}
+
+.narrato-account-public-link:hover {
+  text-decoration: underline;
+}
+
+/* Stats bar */
+.narrato-account-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  padding: 20px 0;
+  border-top: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+  margin-bottom: 32px;
+}
+
+.narrato-stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.narrato-stat-box:hover {
+  background: var(--narrato-color-bg-alt, #f9f9f9);
+}
+
+.narrato-stat-box strong {
+  font-size: 20px;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-stat-box span {
+  font-size: 12px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+}
+
+/* Two-column layout */
+.narrato-account-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 60px;
+}
+
+.narrato-account-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.narrato-account-section {
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.narrato-account-section h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--narrato-color-text, #242424);
+}
+
+/* Form */
+.narrato-account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.narrato-account-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-account-form input,
+.narrato-account-form textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: var(--narrato-font-sans, sans-serif);
+  resize: vertical;
+}
+
+.narrato-account-gravatar-note {
+  font-size: 12px;
+  color: var(--narrato-color-lighter, #b3b3b1);
+  margin: 0;
+}
+
+.narrato-account-gravatar-note a {
+  color: var(--narrato-color-subtle, #6b6b6b);
+}
+
+.narrato-account-form button {
+  align-self: flex-start;
+  border: none;
+  cursor: pointer;
+}
+
+.narrato-account-save-result {
+  font-size: 13px;
+  margin: 0;
+  color: var(--narrato-color-accent, #1a8917);
+}
+
+/* Quick links list */
+.narrato-account-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.narrato-account-links li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.narrato-account-links a {
+  color: var(--narrato-color-text, #242424);
+  text-decoration: none;
+}
+
+.narrato-account-links a:hover {
+  text-decoration: underline;
+}
+
+.narrato-account-story-status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: var(--narrato-color-topic-bg, #f2f2f2);
+  color: var(--narrato-color-subtle, #6b6b6b);
+  text-transform: capitalize;
+}
+
+/* Notifications mini-list */
+.narrato-account-notif-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--narrato-color-border, #e6e6e6);
+  font-size: 13px;
+}
+
+.narrato-account-notif-item:last-child {
+  border-bottom: none;
+}
+
+.narrato-account-notif-item a {
+  color: var(--narrato-color-text, #242424);
+  text-decoration: none;
+}
+
+.narrato-account-notif-time {
+  display: block;
+  font-size: 11px;
+  color: var(--narrato-color-lighter, #b3b3b1);
+  margin-top: 2px;
+}
+
+/* Responsive */
+@media ( max-width: 720px ) {
+  .narrato-account-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .narrato-account-grid {
+    grid-template-columns: 1fr;
+  }
+}

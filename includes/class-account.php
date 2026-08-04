@@ -1,5 +1,7 @@
 <?php
 
+namespace Narrato;
+
 defined('ABSPATH') || exit;
 
 final class Account

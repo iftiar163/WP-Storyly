@@ -21,6 +21,9 @@ final class Assets
         }
 ?>
         <div class="narrato-notif-wrap">
+            <a href="<?php echo esc_url(\Narrato\Account::get_url()); ?>" class="narrato-account-quicklink" aria-label="<?php esc_attr_e('My Account', 'narrato-for-writers'); ?>">
+                <?php echo get_avatar(get_current_user_id(), 32); ?>
+            </a>
             <button class="narrato-notif-bell" aria-label="<?php esc_attr_e('Notifications', 'narrato-for-writers'); ?>">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z" />
@@ -169,6 +172,34 @@ final class Assets
                 ],
             ]);
         }
+
+        // Account Dashboard
+        if (is_user_logged_in() && get_query_var('narrato_account')) {
+            wp_enqueue_style(
+                'narrato-account',
+                NARRATO_URL . 'assets/css/account.css',
+                ['narrato-frontend'],
+                NARRATO_VERSION
+            );
+
+            wp_enqueue_script(
+                'narrato-account',
+                NARRATO_URL . 'assets/js/account.js',
+                [],
+                NARRATO_VERSION,
+                true
+            );
+
+            wp_localize_script('narrato-account', 'narratoAccount', [
+                'restUrl' => esc_url_raw(rest_url('narrato/v1')),
+                'nonce'   => wp_create_nonce('wp_rest'),
+                'i18n'    => [
+                    'saved'    => __('Saved!', 'narrato-for-writers'),
+                    'error'    => __('Something went wrong.', 'narrato-for-writers'),
+                    'noNotifs' => __("You're all caught up!", 'narrato-for-writers'),
+                ],
+            ]);
+        }
     }
 
     public function enqueue_editor(): void
@@ -199,6 +230,7 @@ final class Assets
             || (bool) get_query_var('narrato_profile')
             || (bool) get_query_var('narrato_following')
             || (bool) get_query_var('narrato_my_publications')
-            || (bool) get_query_var('narrato_publication_reviews');
+            || (bool) get_query_var('narrato_publication_reviews')
+            || (bool) get_query_var('narrato_account');
     }
 }

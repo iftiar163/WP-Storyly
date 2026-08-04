@@ -22,5 +22,6 @@ final class Plugin
         (new Engagement())->register();
         (new Social())->register();
         (new Publications())->register();
+        (new Account())->register();
     }
 }
