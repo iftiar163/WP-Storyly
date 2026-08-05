@@ -117,9 +117,27 @@ while (have_posts()) :
                 <?php endif; ?>
 
                 <!-- Content -->
-                <div class="narrato-content">
-                    <?php the_content(); ?>
-                </div>
+                <?php
+                $narrato_paywall_type = \Narrato\Membership\Paywall::get_paywall_type(get_the_ID());
+                $narrato_can_read     = \Narrato\Membership\Paywall::can_read(get_the_ID());
+                ?>
+
+                <?php if ($narrato_can_read) : ?>
+                    <div class="narrato-content">
+                        <?php the_content(); ?>
+                    </div>
+                <?php else : ?>
+                    <div class="narrato-content narrato-content-teaser">
+                        <?php
+                        // Show only the first paragraph as a teaser before the paywall
+                        $narrato_teaser = wp_trim_words(get_the_content(), 60, '…');
+                        echo wpautop(wp_kses_post($narrato_teaser));
+                        ?>
+                        <div class="narrato-content-fade"></div>
+                    </div>
+
+                    <?php include NARRATO_PATH . 'templates/partials/paywall-notice.php'; ?>
+                <?php endif; ?>
 
                 <?php if (is_user_logged_in()) : ?>
                     <!-- Inline engagement (shown on mobile / narrow screens) -->

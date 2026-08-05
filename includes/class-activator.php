@@ -88,9 +88,46 @@ final class Activator
             KEY          submitted_by (submitted_by)
         ) {$charset_collate};";
 
-        dbDelta( $sql_submissions );
+        dbDelta($sql_submissions);
 
-        update_option('narrato_db_version', '1.3.0');
+        // Memberships table — one active row per member
+        $memberships_table = $wpdb->prefix . 'narrato_memberships';
+        $sql_memberships = "CREATE TABLE IF NOT EXISTS {$memberships_table} (
+            id                BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            user_id           BIGINT(20) UNSIGNED NOT NULL,
+            plan              ENUM('monthly','yearly') NOT NULL,
+            gateway           ENUM('stripe','paypal') NOT NULL,
+            gateway_sub_id    VARCHAR(191) NOT NULL,
+            status            ENUM('active','cancelled','past_due','expired') NOT NULL DEFAULT 'active',
+            current_period_end DATETIME NULL,
+            created_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY  (id),
+            UNIQUE KEY   user_id (user_id),
+            KEY          gateway_sub (gateway, gateway_sub_id),
+            KEY          status (status)
+        ) {$charset_collate};";
+        dbDelta($sql_memberships);
+
+        // Transactions table — payment log
+        $transactions_table = $wpdb->prefix . 'narrato_transactions';
+        $sql_transactions = "CREATE TABLE IF NOT EXISTS {$transactions_table} (
+            id              BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+            user_id         BIGINT(20) UNSIGNED NOT NULL,
+            gateway         ENUM('stripe','paypal') NOT NULL,
+            gateway_txn_id  VARCHAR(191) NOT NULL,
+            amount          DECIMAL(10,2) NOT NULL,
+            currency        VARCHAR(3) NOT NULL DEFAULT 'USD',
+            status          ENUM('succeeded','failed','refunded') NOT NULL,
+            plan            ENUM('monthly','yearly') NOT NULL,
+            created_at      DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY  (id),
+            KEY          user_id (user_id),
+            KEY          gateway_txn (gateway, gateway_txn_id)
+        ) {$charset_collate};";
+        dbDelta($sql_transactions);
+
+        update_option('narrato_db_version', '2.0.0');
     }
 
     private static function create_default_topics(): void

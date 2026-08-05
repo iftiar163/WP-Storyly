@@ -171,6 +171,16 @@ final class Assets
                     'noSubmissions' => __('No submissions here yet.', 'narrato-for-writers'),
                 ],
             ]);
+
+            // Membership / Paywall
+            if (is_singular('narrato_story')) {
+                wp_enqueue_style(
+                    'narrato-membership',
+                    NARRATO_URL . 'assets/css/membership.css',
+                    ['narrato-frontend'],
+                    NARRATO_VERSION
+                );
+            }
         }
 
         // Account Dashboard

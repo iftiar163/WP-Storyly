@@ -1,41 +1,59 @@
 <?php
+
 namespace Narrato\Meta;
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-final class Story {
-    public function register() : void {
+final class Story
+{
+    public function register(): void
+    {
         add_action('init', [$this, 'register_meta_fields']);
         add_action('save_post_narrato_story', [$this, 'save_reading_time'], 10, 2);
         add_action('add_meta_boxes_narrato_story', [$this, 'register_meta_boxes']);
         add_action('save_post_narrato_story', [$this, 'save_subtitle_meta'], 10, 2);
     }
 
-    public function register_meta_fields(): void {
+    public function register_meta_fields(): void
+    {
         // Subtitle
-        register_post_meta( 'narrato_story', '_narrato_subtitle', [
+        register_post_meta('narrato_story', '_narrato_subtitle', [
             'type'              => 'string',
-            'description'       => __( 'Story subtitle', 'narrato-for-writers' ),
+            'description'       => __('Story subtitle', 'narrato-for-writers'),
             'single'            => true,
             'default'           => '',
             'sanitize_callback' => 'sanitize_text_field',
-            'auth_callback'     => fn() => current_user_can( 'edit_posts' ),
+            'auth_callback'     => fn() => current_user_can('edit_posts'),
             'show_in_rest'      => true,
-        ] );
+        ]);
 
         // Reading time (minutes) — auto-calculated
-        register_post_meta( 'narrato_story', '_narrato_reading_time', [
+        register_post_meta('narrato_story', '_narrato_reading_time', [
             'type'              => 'integer',
-            'description'       => __( 'Estimated reading time in minutes', 'narrato-for-writers' ),
+            'description'       => __('Estimated reading time in minutes', 'narrato-for-writers'),
             'single'            => true,
             'default'           => 1,
             'sanitize_callback' => 'absint',
-            'auth_callback'     => fn() => current_user_can( 'edit_posts' ),
+            'auth_callback'     => fn() => current_user_can('edit_posts'),
             'show_in_rest'      => true,
-        ] );
+        ]);
+
+        // Paywall type — none | hard | metered
+        register_post_meta('narrato_story', '_narrato_paywall_type', [
+            'type'              => 'string',
+            'description'       => __('Paywall type for this story', 'narrato-for-writers'),
+            'single'            => true,
+            'default'           => 'none',
+            'sanitize_callback' => function ($value) {
+                return in_array($value, ['none', 'hard', 'metered'], true) ? $value : 'none';
+            },
+            'auth_callback'     => fn() => current_user_can('edit_posts'),
+            'show_in_rest'      => true,
+        ]);
     }
 
-    public function register_meta_boxes(): void {
+    public function register_meta_boxes(): void
+    {
         add_meta_box(
             'narrato_subtitle',
             __('Story Subtitle', 'narrato-for-writers'),
@@ -46,65 +64,67 @@ final class Story {
         );
     }
 
-    public function render_subtitle_field( \WP_Post $post ): void {
-        $subtitle = get_post_meta( $post->ID, '_narrato_subtitle', true );
-        wp_nonce_field( 'narrato_subtitle_nonce', 'narrato_subtitle_nonce' );
-        ?>
-        <input 
-            type="text" 
-            id="narrato_subtitle" 
-            name="narrato_subtitle" 
-            value="<?php echo esc_attr( $subtitle ); ?>" 
-            placeholder="<?php esc_attr_e( 'Enter story subtitle', 'narrato-for-writers' ); ?>"
-            style="width: 100%; padding: 8px; font-size: 14px;"
-        />
-        <?php
+    public function render_subtitle_field(\WP_Post $post): void
+    {
+        $subtitle = get_post_meta($post->ID, '_narrato_subtitle', true);
+        wp_nonce_field('narrato_subtitle_nonce', 'narrato_subtitle_nonce');
+?>
+        <input
+            type="text"
+            id="narrato_subtitle"
+            name="narrato_subtitle"
+            value="<?php echo esc_attr($subtitle); ?>"
+            placeholder="<?php esc_attr_e('Enter story subtitle', 'narrato-for-writers'); ?>"
+            style="width: 100%; padding: 8px; font-size: 14px;" />
+<?php
     }
 
-    public function save_subtitle_meta( int $post_id, \WP_Post $post ): void {
+    public function save_subtitle_meta(int $post_id, \WP_Post $post): void
+    {
         // Skip autosaves and revisions
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }
 
-        if ( wp_is_post_revision( $post_id ) ) {
+        if (wp_is_post_revision($post_id)) {
             return;
         }
 
         // Verify nonce
-        if ( ! isset( $_POST['narrato_subtitle_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['narrato_subtitle_nonce'] ) ), 'narrato_subtitle_nonce' ) ) {
+        if (! isset($_POST['narrato_subtitle_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['narrato_subtitle_nonce'])), 'narrato_subtitle_nonce')) {
             return;
         }
 
         // Check user capability
-        if ( ! current_user_can( 'edit_post', $post_id ) ) {
+        if (! current_user_can('edit_post', $post_id)) {
             return;
         }
 
         // Save subtitle
-        if ( isset( $_POST['narrato_subtitle'] ) ) {
-            $subtitle = sanitize_text_field( wp_unslash( $_POST['narrato_subtitle'] ) );
-            update_post_meta( $post_id, '_narrato_subtitle', $subtitle );
+        if (isset($_POST['narrato_subtitle'])) {
+            $subtitle = sanitize_text_field(wp_unslash($_POST['narrato_subtitle']));
+            update_post_meta($post_id, '_narrato_subtitle', $subtitle);
         } else {
-            delete_post_meta( $post_id, '_narrato_subtitle' );
+            delete_post_meta($post_id, '_narrato_subtitle');
         }
     }
 
-    public function save_reading_time( int $post_id, \WP_Post $post ): void {
+    public function save_reading_time(int $post_id, \WP_Post $post): void
+    {
         // Skip autosaves and revisions
-        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }
 
-        if ( wp_is_post_revision( $post_id ) ) {
+        if (wp_is_post_revision($post_id)) {
             return;
         }
 
-        $content      = wp_strip_all_tags( $post->post_content );
-        $word_count   = str_word_count( $content );
-        $reading_time = (int) ceil( $word_count / 200 ); // 200 wpm average
-        $reading_time = max( 1, $reading_time );          // minimum 1 min
+        $content      = wp_strip_all_tags($post->post_content);
+        $word_count   = str_word_count($content);
+        $reading_time = (int) ceil($word_count / 200); // 200 wpm average
+        $reading_time = max(1, $reading_time);          // minimum 1 min
 
-        update_post_meta( $post_id, '_narrato_reading_time', $reading_time );
+        update_post_meta($post_id, '_narrato_reading_time', $reading_time);
     }
 }

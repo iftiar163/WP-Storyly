@@ -1,0 +1,75 @@
+/* ============================================================
+   Narrato — Membership & Paywall Styles
+   ============================================================ */
+
+.narrato-content-teaser {
+  position: relative;
+  max-height: 340px;
+  overflow: hidden;
+}
+
+.narrato-content-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--narrato-color-bg, #ffffff) 90%);
+  pointer-events: none;
+}
+
+.narrato-paywall-notice {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.narrato-paywall-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: var(--narrato-color-topic-bg, #f2f2f2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.narrato-paywall-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--narrato-color-text, #242424);
+}
+
+.narrato-paywall-title {
+  font-family: var(--narrato-font-serif, Georgia, serif);
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-paywall-desc {
+  font-size: 15px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.narrato-paywall-cta {
+  border: none;
+  padding: 12px 32px;
+  font-size: 15px;
+}
+
+.narrato-paywall-login {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--narrato-color-subtle, #6b6b6b);
+}
+
+.narrato-paywall-login a {
+  color: var(--narrato-color-text, #242424);
+  font-weight: 600;
+}

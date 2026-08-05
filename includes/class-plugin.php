@@ -17,11 +17,13 @@ final class Plugin
         (new CPT\Story())->register();
         (new Taxonomy\Topic())->register();
         (new Meta\Story())->register();
+        (new Meta\StoryMetabox())->register();
         (new Assets())->register();
         (new Admin\Settings())->register();
         (new Engagement())->register();
         (new Social())->register();
         (new Publications())->register();
         (new Account())->register();
+        (new MembershipBootstrap())->register();
     }
 }

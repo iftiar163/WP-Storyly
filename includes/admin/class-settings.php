@@ -232,6 +232,9 @@ final class Settings
         $clean['show_related'] = !empty($input['show_related']) ? 1 : 0;
 
         $clean['archive_slug'] = isset($input['archive_slug']) ? sanitize_title($input['archive_slug']) : 'stories';
+        $clean['metered_free_reads'] = isset($input['metered_free_reads'])
+            ? min(50, max(0, absint($input['metered_free_reads'])))
+            : 3;
 
         // Flush rewrite rules if archive slug changed.
         if ($clean['archive_slug'] !== $this->get_options()['archive_slug']) {
@@ -244,7 +247,7 @@ final class Settings
     public static function get_options(): array
     {
         return wp_parse_args(
-            get_option( self::OPTION_NAME, [] ),
+            get_option(self::OPTION_NAME, []),
             [
                 'stories_per_page' => 10,
                 'show_reading_time' => 1,
@@ -252,6 +255,7 @@ final class Settings
                 'show_author_bio'   => 1,
                 'show_related'      => 1,
                 'archive_slug'      => 'stories',
+                'metered_free_reads' => 3,
             ]
         );
     }
