@@ -20,6 +20,7 @@ final class Plugin
         (new Meta\StoryMetabox())->register();
         (new Assets())->register();
         (new Admin\Settings())->register();
+        (new Admin\MembershipSettings())->register();
         (new Engagement())->register();
         (new Social())->register();
         (new Publications())->register();
