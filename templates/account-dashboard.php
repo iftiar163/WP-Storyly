@@ -1,4 +1,5 @@
 <?php
+
 defined('ABSPATH') || exit;
 
 get_header();
@@ -23,12 +24,14 @@ endif;
 $narrato_user_id = get_current_user_id();
 $narrato_user    = wp_get_current_user();
 
-$narrato_story_count = count_user_posts($narrato_user_id, 'narrato_story', true);
-$narrato_follower_cnt = \Narrato\Social\Follows::get_count('author', $narrato_user_id);
-$narrato_following_authors = count(\Narrato\Social\Follows::get_followed_author_ids($narrato_user_id));
-$narrato_following_topics  = count(\Narrato\Social\Follows::get_followed_topic_ids($narrato_user_id));
-$narrato_bookmark_count = count(\Narrato\Engagement\Bookmarks::get_user_bookmarks($narrato_user_id));
-$narrato_pub_count = count(\Narrato\Publications\Editors::get_editors_publications($narrato_user_id));
+$narrato_story_count        = count_user_posts($narrato_user_id, 'narrato_story', true);
+$narrato_follower_cnt       = \Narrato\Social\Follows::get_count('author', $narrato_user_id);
+$narrato_following_authors  = count(\Narrato\Social\Follows::get_followed_author_ids($narrato_user_id));
+$narrato_following_topics   = count(\Narrato\Social\Follows::get_followed_topic_ids($narrato_user_id));
+$narrato_bookmark_count     = count(\Narrato\Engagement\Bookmarks::get_user_bookmarks($narrato_user_id));
+$narrato_pub_count          = count(\Narrato\Publications\Editors::get_editors_publications($narrato_user_id));
+$narrato_is_member          = \Narrato\Membership\Membership::is_member( $narrato_user_id );
+$narrato_member_row         = \Narrato\Membership\Membership::get_membership_row( $narrato_user_id );
 ?>
 
 <div class="narrato-wrapper">
@@ -37,7 +40,10 @@ $narrato_pub_count = count(\Narrato\Publications\Editors::get_editors_publicatio
         <header class="narrato-account-header">
             <?php echo get_avatar($narrato_user_id, 72, '', '', ['class' => 'narrato-account-avatar']); ?>
             <div>
-                <h1 class="narrato-account-name"><?php echo esc_html($narrato_user->display_name); ?></h1>
+                <h1 class="narrato-account-name">
+                    <?php echo esc_html( $narrato_user->display_name ); ?>
+                    <?php echo \Narrato\Membership\Membership::render_badge( $narrato_user_id ); ?>
+                </h1>
                 <a href="<?php echo esc_url(\Narrato\Social\Profile::get_url($narrato_user)); ?>" class="narrato-account-public-link">
                     <?php esc_html_e('View public profile →', 'narrato-for-writers'); ?>
                 </a>
@@ -67,6 +73,33 @@ $narrato_pub_count = count(\Narrato\Publications\Editors::get_editors_publicatio
                 <span><?php esc_html_e('Publications', 'narrato-for-writers'); ?></span>
             </a>
         </div>
+
+        <!-- Membership status -->
+        <section class="narrato-account-section narrato-account-membership-section">
+            <h2><?php esc_html_e( 'Membership', 'narrato-for-writers' ); ?></h2>
+            <?php if ( $narrato_is_member ) : ?>
+                <p class="narrato-membership-status-active">
+                    <?php printf(
+                        /* translators: 1: plan name, 2: renewal date */
+                        esc_html__( '✓ Active — %1$s plan, renews %2$s', 'narrato-for-writers' ),
+                        esc_html( ucfirst( $narrato_member_row['plan'] ?? '' ) ),
+                        esc_html( $narrato_member_row['current_period_end']
+                            ? date_i18n( 'M j, Y', strtotime( $narrato_member_row['current_period_end'] ) )
+                            : '—' )
+                    ); ?>
+                </p>
+                <a href="<?php echo esc_url( home_url( '/membership/' ) ); ?>" class="narrato-account-links-inline">
+                    <?php esc_html_e( 'Manage membership →', 'narrato-for-writers' ); ?>
+                </a>
+            <?php else : ?>
+                <p class="narrato-membership-status-inactive">
+                    <?php esc_html_e( "You're not a member yet.", 'narrato-for-writers' ); ?>
+                </p>
+                <a href="<?php echo esc_url( home_url( '/membership/' ) ); ?>" class="narrato-follow-btn narrato-follow-btn-sm">
+                    <?php esc_html_e( 'Become a Member', 'narrato-for-writers' ); ?>
+                </a>
+            <?php endif; ?>
+        </section>
 
         <div class="narrato-account-grid">
 

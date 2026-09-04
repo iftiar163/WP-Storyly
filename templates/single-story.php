@@ -75,6 +75,7 @@ while (have_posts()) :
                             class="narrato-author-name">
                             <?php the_author(); ?>
                         </a>
+                        <?php echo \Narrato\Membership\Membership::render_badge( $narrato_author_id ); ?>
                         <?php if (get_current_user_id() !== $narrato_author_id) :
                             $narrato_is_following_author = is_user_logged_in()
                                 ? \Narrato\Social\Follows::is_following(get_current_user_id(), 'author', $narrato_author_id)

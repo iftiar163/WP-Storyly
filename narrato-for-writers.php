@@ -25,34 +25,35 @@ define('NARRATO_URL',         plugin_dir_url(__FILE__));
 define('NARRATO_BASENAME',    plugin_basename(__FILE__));
 
 // Autoloader
-spl_autoload_register(function (string $class): void {
+spl_autoload_register( function ( string $class ): void {
     $prefix   = 'Narrato\\';
     $base_dir = NARRATO_PATH . 'includes/';
 
-    if (! str_starts_with($class, $prefix)) {
+    if ( ! str_starts_with( $class, $prefix ) ) {
         return;
     }
 
-    // Strip the root namespace: e.g. "Narrato\CPT\Story" → "CPT\Story"
-    $relative = substr($class, strlen($prefix));
+    $relative = substr( $class, strlen( $prefix ) );
+    $parts    = explode( '\\', $relative );
+    $class_name = array_pop( $parts );
+    $sub_dir    = strtolower( implode( '/', $parts ) );
+    $sub_dir    = $sub_dir ? $sub_dir . '/' : '';
 
-    // Split into parts: ["CPT", "Story"]
-    $parts = explode('\\', $relative);
+    // Convert PascalCase to kebab-case, e.g. "StripeGateway" → "stripe-gateway"
+    $kebab = strtolower( preg_replace( '/(?<!^)[A-Z]/', '-$0', $class_name ) );
 
-    if (count($parts) === 1) {
-        // Top-level class: Narrato\Plugin → includes/class-plugin.php
-        $file = $base_dir . 'class-' . strtolower($parts[0]) . '.php';
-    } else {
-        // Namespaced class: Narrato\CPT\Story → includes/cpt/class-story.php
-        $class_name = array_pop($parts);
-        $sub_dir    = strtolower(implode('/', $parts));
-        $file       = $base_dir . $sub_dir . '/class-' . strtolower($class_name) . '.php';
+    $candidates = [
+        $base_dir . $sub_dir . 'class-' . $kebab . '.php',                    // stripe-gateway
+        $base_dir . $sub_dir . 'class-' . strtolower( $class_name ) . '.php', // stripegateway
+    ];
+
+    foreach ( $candidates as $file ) {
+        if ( file_exists( $file ) ) {
+            require_once $file;
+            return;
+        }
     }
-
-    if (file_exists($file)) {
-        require_once $file;
-    }
-});
+} );
 
 // Activation Hook
 register_activation_hook(

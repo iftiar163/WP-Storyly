@@ -14,7 +14,11 @@
   left: 0;
   right: 0;
   height: 140px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--narrato-color-bg, #ffffff) 90%);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    var(--narrato-color-bg, #ffffff) 90%
+  );
   pointer-events: none;
 }
 
@@ -72,4 +76,190 @@
 .narrato-paywall-login a {
   color: var(--narrato-color-text, #242424);
   font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   Membership Checkout Page
+   ------------------------------------------------------------ */
+.narrato-membership-container {
+  max-width: 480px;
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+.narrato-membership-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.narrato-membership-header h1 {
+  font-family: var(--narrato-font-serif, Georgia, serif);
+  font-size: 30px;
+  margin: 0 0 8px;
+}
+
+.narrato-membership-header p {
+  color: var(--narrato-color-subtle, #6b6b6b);
+  font-size: 15px;
+}
+
+.narrato-membership-active {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.narrato-membership-active h1 {
+  font-family: var(--narrato-font-serif, Georgia, serif);
+  font-size: 26px;
+  margin: 0 0 12px;
+}
+
+.narrato-cancel-result {
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+/* Plan picker */
+.narrato-plan-picker {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.narrato-plan-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 20px 16px;
+  border: 2px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.narrato-plan-option input {
+  position: absolute;
+  opacity: 0;
+}
+
+.narrato-plan-option:has(input:checked) {
+  border-color: var(--narrato-color-text, #242424);
+}
+
+.narrato-plan-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-plan-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--narrato-color-text, #242424);
+}
+
+.narrato-plan-price small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--narrato-color-subtle, #6b6b6b);
+}
+
+.narrato-plan-badge {
+  position: absolute;
+  top: -10px;
+  background: var(--narrato-color-accent, #1a8917);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+/* Gateway tabs */
+.narrato-gateway-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.narrato-gateway-tab {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  background: #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--narrato-font-sans, sans-serif);
+}
+
+.narrato-gateway-tab.is-active {
+  border-color: var(--narrato-color-text, #242424);
+  background: var(--narrato-color-text, #242424);
+  color: #fff;
+}
+
+.narrato-gateway-panel {
+  display: none;
+}
+
+.narrato-gateway-panel.is-active {
+  display: block;
+}
+
+#narrato-stripe-card-element {
+  padding: 12px;
+  border: 1px solid var(--narrato-color-border, #e6e6e6);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  background: #fff;
+}
+
+.narrato-checkout-error {
+  color: #d33;
+  font-size: 13px;
+  margin-bottom: 12px;
+  min-height: 18px;
+}
+
+.narrato-checkout-submit {
+  width: 100%;
+  border: none;
+  padding: 12px;
+  font-size: 15px;
+}
+
+.narrato-checkout-submit[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#narrato-paypal-buttons {
+  min-height: 45px;
+}
+
+/* ------------------------------------------------------------
+   Member Badge
+   ------------------------------------------------------------ */
+.narrato-member-badge {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+.narrato-member-badge svg {
+  width: 15px;
+  height: 15px;
+  fill: #f5a623;
+}
+
+.narrato-profile-name .narrato-member-badge svg,
+.narrato-account-name .narrato-member-badge svg {
+  width: 20px;
+  height: 20px;
 }

@@ -110,4 +110,15 @@ final class Membership
             'plan'           => $plan,
         ]);
     }
+
+    public static function render_badge( int $user_id ): string {
+        if ( ! self::is_member( $user_id ) ) {
+            return '';
+        }
+
+        return '<span class="narrato-member-badge" title="' . esc_attr__( 'Narrato Member', 'narrato-for-writers' ) . '">'
+            . '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+            . '<path d="M12 2 15 6 20 6.5 17 10.5 18 16 12 13.5 6 16 7 10.5 4 6.5 9 6z"/>'
+            . '</svg></span>';
+    }
 }

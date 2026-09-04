@@ -210,6 +210,58 @@ final class Assets
                 ],
             ]);
         }
+
+        // Membership checkout page
+        if ( get_query_var( 'narrato_membership' ) ) {
+            $narrato_stripe_gateway = new \Narrato\Membership\StripeGateway();
+            $narrato_paypal_gateway = new \Narrato\Membership\PaypalGateway();
+
+            wp_enqueue_style(
+                'narrato-membership',
+                NARRATO_URL . 'assets/css/membership.css',
+                [ 'narrato-frontend' ],
+                NARRATO_VERSION
+            );
+
+            if ( $narrato_stripe_gateway->is_configured() ) {
+                wp_enqueue_script( 'stripe-js', 'https://js.stripe.com/v3/', [], null, true );
+            }
+
+            if ( $narrato_paypal_gateway->is_configured() ) {
+                $narrato_paypal_keys = \Narrato\Membership\PaypalGateway::get_keys();
+                wp_enqueue_script(
+                    'paypal-sdk',
+                    'https://www.paypal.com/sdk/js?client-id=' . rawurlencode( $narrato_paypal_keys['client_id'] ) . '&vault=true&intent=subscription',
+                    [],
+                    null,
+                    true
+                );
+            }
+
+            wp_enqueue_script(
+                'narrato-checkout',
+                NARRATO_URL . 'assets/js/checkout.js',
+                array_filter( [
+                    $narrato_stripe_gateway->is_configured() ? 'stripe-js' : null,
+                    $narrato_paypal_gateway->is_configured() ? 'paypal-sdk' : null,
+                ] ),
+                NARRATO_VERSION,
+                true
+            );
+
+            wp_localize_script( 'narrato-checkout', 'narratoCheckout', [
+                'restUrl'    => esc_url_raw( rest_url( 'narrato/v1' ) ),
+                'nonce'      => wp_create_nonce( 'wp_rest' ),
+                'successUrl' => home_url( '/membership/' ),
+                'i18n'       => [
+                    'processing'    => __( 'Processing…', 'narrato-for-writers' ),
+                    'subscribe'     => __( 'Subscribe', 'narrato-for-writers' ),
+                    'error'         => __( 'Something went wrong. Please try again.', 'narrato-for-writers' ),
+                    'confirmCancel' => __( 'Are you sure you want to cancel your membership?', 'narrato-for-writers' ),
+                    'cancelled'     => __( 'Membership cancelled.', 'narrato-for-writers' ),
+                ],
+            ] );
+        }
     }
 
     public function enqueue_editor(): void
@@ -241,6 +293,7 @@ final class Assets
             || (bool) get_query_var('narrato_following')
             || (bool) get_query_var('narrato_my_publications')
             || (bool) get_query_var('narrato_publication_reviews')
-            || (bool) get_query_var('narrato_account');
+            || (bool) get_query_var('narrato_account')
+            || (bool) get_query_var( 'narrato_membership' );
     }
 }

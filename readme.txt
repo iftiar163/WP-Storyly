@@ -106,7 +106,27 @@ Please use the support forum on wordpress.org for bug reports and feature reques
 * New: "Open for submissions" toggle per publication
 * New: REST API endpoints for publications, editors, and submissions (narrato/v1)
 
+= 2.0.0 =
+* New: Publications — create multi-editor publications with logo, cover, and description
+* New: Writers can submit their own stories to publications for review
+* New: Editors can Approve, Reject, or Request Changes on submissions, with an optional note
+* New: Email + on-site notifications for new submissions and review decisions
+* New: Publication pages at /publication/{slug}/
+* New: /my-publications/ dashboard and /publication-reviews/ editor queue
+* New: Account Dashboard at /narrato-profile/ — stats, profile editing, recent notifications, recent stories
+* New: Membership system with Monthly and Yearly plans
+* New: Stripe and PayPal payment integration (subscriptions via REST API, no bundled SDKs)
+* New: Hard and Metered paywalls, selectable per-story
+* New: Configurable free monthly reads for metered stories
+* New: Member badge shown on author bylines and profile pages
+* New: Membership status and renewal date shown on the Account Dashboard
+* New: Test Mode / Live Mode toggle for both payment gateways
+* Improved: Autoloader now supports both kebab-case and flat lowercase file names for reliability
+
 == Upgrade Notice ==
+
+= 2.0.0 =
+Major update: adds Publications, an Account Dashboard, and a full Membership system with Stripe/PayPal subscriptions and paywalls. Please back up your site before updating, and test payment gateways in Test Mode before switching to Live.
 
 = 1.3.0 =
 Adds Publications — multi-author collections with a submission and review workflow. Recommended update.

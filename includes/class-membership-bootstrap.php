@@ -11,5 +11,7 @@ final class MembershipBootstrap
     {
         (new Membership\Membership())->register();
         (new Membership\Paywall())->register();
+        (new Membership\Checkout())->register();
+        (new Membership\MembershipPage())->register();
     }
 }

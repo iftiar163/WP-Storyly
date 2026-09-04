@@ -204,7 +204,7 @@
 }
 
 /* Responsive */
-@media ( max-width: 720px ) {
+@media (max-width: 720px) {
   .narrato-account-stats {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -212,4 +212,32 @@
   .narrato-account-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.narrato-account-membership-section {
+  margin-bottom: 24px;
+}
+
+.narrato-membership-status-active {
+  color: var(--narrato-color-accent, #1a8917);
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.narrato-membership-status-inactive {
+  color: var(--narrato-color-subtle, #6b6b6b);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.narrato-account-links-inline {
+  font-size: 13px;
+  color: var(--narrato-color-text, #242424);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.narrato-account-links-inline:hover {
+  text-decoration: underline;
 }

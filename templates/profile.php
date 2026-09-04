@@ -29,7 +29,10 @@ $narrato_is_self      = get_current_user_id() === $narrato_user_id;
         <header class="narrato-profile-header">
             <?php echo get_avatar($narrato_user_id, 96, '', '', ['class' => 'narrato-profile-avatar']); ?>
 
-            <h1 class="narrato-profile-name"><?php echo esc_html($narrato_user->display_name); ?></h1>
+            <h1 class="narrato-profile-name">
+                <?php echo esc_html( $narrato_user->display_name ); ?>
+                <?php echo \Narrato\Membership\Membership::render_badge( $narrato_user_id ); ?>
+            </h1>
 
             <?php if ($narrato_user->description) : ?>
                 <p class="narrato-profile-bio"><?php echo esc_html($narrato_user->description); ?></p>
